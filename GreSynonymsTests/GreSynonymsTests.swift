@@ -24,7 +24,9 @@ class GreSynonymsTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        print(Utilities.readDataFromCSV(fileName: "SynonymsList"))
+        let bank = SynonymsBank()
+        print(bank.categories)
+        print(bank.synonymsDict)
     }
     
     func testPerformanceExample() {
