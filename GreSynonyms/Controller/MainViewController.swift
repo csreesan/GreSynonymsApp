@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  GreSynonyms
 //
 //  Created by Chris Sreesangkom on 6/18/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,11 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    @IBAction func newGameButtonPushed(_ sender: Any) {
+        performSegue(withIdentifier: "toSelectCategories", sender: self)
+    }
+    
+    
 }
 
