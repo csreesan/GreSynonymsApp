@@ -20,10 +20,12 @@ class MainViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func newGameButtonPushed(_ sender: Any) {
+//    @IBAction func newGameButtonPushed(_ sender: Any) {
+//        performSegue(withIdentifier: "toSelectCategories", sender: self)
+//    }
+    
+    @IBAction func buttonPushed(_ sender: UIButton) {
         performSegue(withIdentifier: "toSelectCategories", sender: self)
     }
-    
-    
 }
 

@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GreSynonymsTests/GreSynonymsTests.swift"
-            timestampString = "551074107.426656"
+            filePath = "GreSynonyms/Model/PickTheCategoryModel.swift"
+            timestampString = "552469863.413245"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "testExample()"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "init(chosenCategories:synonymsDict:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

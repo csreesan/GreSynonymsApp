@@ -12,21 +12,27 @@ let FILE_NAME = "SynonymsData"
 
 class SynonymsBank {
     
-    var synonymsDict: [String: [String]] = [:]
+    var synonymsDict: [String: [WordClass]] = [:]
     var categories: [String]
     init() {
         let csvString = Utilities.readDataFromCSV(fileName: FILE_NAME)
         guard let rows = csvString?.components(separatedBy: "\r") else {
             print("Faied to initialize")
             categories = []
-            synonymsDict = ["":[""]]
+            synonymsDict = ["":[]]
             return
         }
         categories = []
         for i in 0..<rows.count {
             let row = rows[i].components(separatedBy: ",")
-            categories.append(row[0])
-            synonymsDict[row[0]] = row[1..<row.count].filter {$0 != ""}
+            let wordCategory = row[0]
+            categories.append(wordCategory)
+            let wordList = row[1..<row.count].filter {$0 != ""}
+            var wordObjectList:[WordClass] = []
+            for word in wordList {
+                wordObjectList.append(WordClass(word: word, answer: wordCategory))
+            }
+            synonymsDict[wordCategory] = wordObjectList
         }
     }
 }
