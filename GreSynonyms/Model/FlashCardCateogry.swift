@@ -1,5 +1,5 @@
 //
-//  CategoryObject.swift
+//  FlashCardCategory.swift
 //  GreSynonyms
 //
 //  Created by Chris Sreesangkom on 7/8/18.
@@ -18,9 +18,9 @@ protocol FlashCardCategory {
 class SynonymObject: FlashCardCategory {
     let id: Int
     let label: String
-    init(id: Int, label: String) {
+    init(id: Int) {
         self.id = id
-        self.label = label
+        self.label = DatabaseUtility.getSynonymLabel(synId: self.id)!
     }
     
     func getLabel() -> String {
@@ -28,7 +28,7 @@ class SynonymObject: FlashCardCategory {
     }
     
     func getWords() -> [WordObject] {
-        return DatabaseUtility.getSynonyms(synId: self.id)!
+        return DatabaseUtility.getSynonymsFromSynID(synId: self.id)!
     }
 }
 

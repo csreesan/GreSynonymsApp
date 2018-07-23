@@ -39,7 +39,7 @@ class MainViewController: UIViewController {
     }
 
     @IBAction func yeahNahButtonPushed(_ sender: UIButton) {
-        performSegue(withIdentifier: "toYesNoWordSelection", sender: self)
+        performSegue(withIdentifier: "toYesNoCateogrySelection", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

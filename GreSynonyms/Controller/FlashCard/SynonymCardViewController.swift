@@ -10,16 +10,22 @@ import UIKit
 
 class SynonymCardViewController: UIViewController {
 
-//    @IBOutlet weak var synonymsLabel: UILabel!
     @IBOutlet weak var synonymsLabel: UILabel!
     var synonymsList = [WordObject]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        let stringList = synonymsList.map {$0.word}
-        synonymsLabel.text = stringList.joined(separator: "\n")
-        synonymsLabel.sizeToFit()
+        updateUI()
     }
-
+    
+    func updateUI() {
+        let stringList = self.synonymsList.map {$0.word}
+        self.synonymsLabel.text = stringList.joined(separator: "\n")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        updateUI()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

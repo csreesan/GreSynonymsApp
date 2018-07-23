@@ -11,25 +11,30 @@ import Foundation
 class WordObject {
     let id: Int
     let word: String
-    let partOfSpeech: String
-    let meaning: String
-    let example: String
-    let synonymId: Int
-    init(id: Int, word: String, partOfSpeech: String, meaning: String, example: String, synonymId: Int) {
+    var meaningList: [MeaningObject] = []
+    init(id: Int, word: String) {
         self.id = id
         self.word = word
-        self.partOfSpeech = partOfSpeech
-        self.meaning = meaning
-        self.example = example
-        self.synonymId = synonymId
+        self.meaningList = getMeaningList()
     }
     
     func getSynonyms() -> [WordObject] {
-        return DatabaseUtility.getSynonyms(synId: self.synonymId, wordId: self.id)!
+        return DatabaseUtility.getSynonymsOfWord(wordId: self.id)!
     }
     
-    func getSynonymObject() -> SynonymObject {
-        let label = DatabaseUtility.getSynonymLabel(synId: self.synonymId)!
-        return SynonymObject(id: DatabaseUtility.getSynonymGroupID(wordId: self.id)!, label: label)
+    func getSynonymObjectList() -> [SynonymObject] {
+        var synonymObjectList: [SynonymObject] = []
+        for synonymID in DatabaseUtility.getSynonymGroupIDList(wordId: self.id)! {
+            synonymObjectList.append(SynonymObject(id: synonymID))
+        }
+        return synonymObjectList
+    }
+    
+    func getMeaningList() -> [MeaningObject] {
+        return DatabaseUtility.getMeaningObjectList(wordId: self.id)!
+    }
+    
+    func getSynonymIDList() -> [Int] {
+        return getSynonymObjectList().map {$0.id}
     }
 }

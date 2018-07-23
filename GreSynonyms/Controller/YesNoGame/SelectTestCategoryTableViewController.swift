@@ -1,5 +1,5 @@
 //
-//  SelectTestWordTableViewController.swift
+//  SelectTestCategoryTableViewController.swift
 //  GreSynonyms
 //
 //  Created by Chris Sreesangkom on 6/18/18.
@@ -9,17 +9,17 @@
 import UIKit
 
 protocol YesNoGameObjectReceiver {
-    func receivedGameObjectAndCurrentVC(gameObject: YesNoGameObject, viewController: UIViewController)
+    func receivedGameObject(gameObject: YesNoGameObject)
 }
 
 let toYesNoGameSeagueIdentifier = "toYesNoGame"
 
-class SelectTestWordTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SelectTestCategoryTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var wordsTableView: UITableView!
     @IBOutlet weak var orderingPickerView: UIPickerView!
-    let wordList = DatabaseUtility.getAllWords()
-    var wordIndex = 0
+    let synonymsList = DatabaseUtility.getAllSynonymObjects()!
+    var synonymIndex = 0
     var checkMarkCount = 0
     
     override func viewDidLoad() {
@@ -33,23 +33,24 @@ class SelectTestWordTableViewController: UIViewController, UITableViewDelegate, 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.wordList.count
+        return self.synonymsList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = wordsTableView.dequeueReusableCell(withIdentifier: "Cell")
-        cell?.textLabel?.text = self.wordList[indexPath.row].word
+        cell?.textLabel?.text = self.synonymsList[indexPath.row].label
         return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.wordIndex = indexPath.row
+        self.synonymIndex = indexPath.row
         performSegue(withIdentifier: toYesNoGameSeagueIdentifier, sender: self)
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == toYesNoGameSeagueIdentifier {
             let gameVC = segue.destination as! YesNoGameViewController
-            gameVC.receivedGameObjectAndCurrentVC(gameObject: YesNoGameObject(chosenWordObject: self.wordList[self.wordIndex]), viewController: self)
+            gameVC.receivedGameObject(gameObject: YesNoGameObject(synonymObject: self.synonymsList[self.synonymIndex]))
         }
     }
     

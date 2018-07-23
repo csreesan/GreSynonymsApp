@@ -11,7 +11,6 @@ import UIKit
 class YesNoGameViewController: UIViewController, YesNoGameObjectReceiver {
     
     //MARK: Instance Attributes
-    var mainWord: WordObject?
     var categories: [String] = []
     var score = 0
     var currWord = 0
@@ -21,7 +20,10 @@ class YesNoGameViewController: UIViewController, YesNoGameObjectReceiver {
     var prevViewController: UIViewController?
     var correctWordList: [WordObject] = []
     var wrongWordList: [WordObject] = []
+    var correctIDs: [Int] = []
     
+    @IBOutlet weak var yepButton: UIButton!
+    @IBOutlet weak var nopeButton: UIButton!
     @IBOutlet weak var mainWordLabel: UILabel!
     @IBOutlet weak var changingWordLabel: UILabel!
     
@@ -33,20 +35,26 @@ class YesNoGameViewController: UIViewController, YesNoGameObjectReceiver {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.wordList = (self.gameObject?.shuffledWordList)!
-        self.mainWordLabel.text = self.gameObject?.getMainWordLabel()
-        self.mainWord = self.gameObject?.chosenWord
+        self.mainWordLabel.text = self.gameObject?.mainLabel
         self.changingWordLabel.text = self.wordList[self.currWord].word
         self.totalWords = self.wordList.count
+        self.navigationController?.isNavigationBarHidden = true
+        self.nopeButton.layer.cornerRadius = 20
+        self.yepButton.layer.cornerRadius = 20
         updateScoreAndProgress()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    func receivedGameObjectAndCurrentVC(gameObject: YesNoGameObject, viewController: UIViewController) {
+    func receivedGameObject(gameObject: YesNoGameObject) {
         self.gameObject = gameObject
-        self.prevViewController = viewController
+        self.correctIDs = gameObject.correctIDs
     }
     
     func checkAnswer(answerTag: Int) {
@@ -61,7 +69,13 @@ class YesNoGameViewController: UIViewController, YesNoGameObjectReceiver {
     }
     
     func correctButtonTag() -> Int{
-        return self.mainWord?.synonymId == self.wordList[self.currWord].synonymId ? 1: 0
+        let currWordSynID = self.wordList[self.currWord].getSynonymIDList()
+        for id in currWordSynID {
+            if self.correctIDs.contains(id) {
+                return 1
+            }
+        }
+        return 0
     }
     
     
@@ -106,7 +120,7 @@ class YesNoGameViewController: UIViewController, YesNoGameObjectReceiver {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toCat" {
-            var categoryList : [FlashCardCategory] = [(mainWord?.getSynonymObject())!]
+            var categoryList : [FlashCardCategory] = self.gameObject!.synonymObjectList
             categoryList.append(SpecialCateogryObject(isCorrect: true, wordList: self.correctWordList))
             categoryList.append(SpecialCateogryObject(isCorrect: false, wordList: self.wrongWordList))
             let destinationVC = segue.destination as! CateogriesViewController

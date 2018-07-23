@@ -15,9 +15,7 @@ class WordsTabBarController: UITabBarController, WordObjectReceiver {
         super.viewDidLoad()
         let wordMeaningVC = self.viewControllers![0] as! WordMeaningViewController
         let synonymVC = self.viewControllers![1] as! SynonymCardViewController
-        let synonymsList = wordObject!.getSynonyms()
-        wordMeaningVC.setWordObject(wordObject: wordObject!)
-        synonymVC.setSynonymsList(synonymsList: synonymsList)
+        wordMeaningVC.setWordObjectAndSynonymVC(wordObject: wordObject!, synonymVC: synonymVC)
     }
 
     override func didReceiveMemoryWarning() {
