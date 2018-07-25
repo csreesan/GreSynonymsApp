@@ -14,18 +14,9 @@ enum databaseError: Error {
     case noResultRows
 }
 
-class Column {
-    static let id = Expression<Int>("id")
-    static let word = Expression<String>("word")
-    static let part_of_speech = Expression<String>("part_of_speech")
-    static let meaning = Expression<String>("meaning")
-    static let example = Expression<String>("example")
-    static let word_id = Expression<Int>("word_id")
-    static let synonym_id = Expression<Int>("synonym_id")
-    static let label = Expression<String>("label")
-}
 
-class DatabaseUtility {
+
+class DictionaryDatabaseUtility {
     
     static var database: Connection? = nil
     
@@ -81,7 +72,7 @@ class DatabaseUtility {
         var wordArr: [WordObject] = []
         let meaningsRows: Table
         if let excludeWordId = excludeWordId {
-            meaningsRows = self.meaningsTable.where(Column.synonym_id == synId && Column.id != excludeWordId)
+            meaningsRows = self.meaningsTable.where(Column.synonym_id == synId && Column.word_id != excludeWordId)
         } else {
             meaningsRows = self.meaningsTable.where(Column.synonym_id == synId)
         }

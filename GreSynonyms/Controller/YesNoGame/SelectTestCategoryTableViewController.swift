@@ -18,7 +18,7 @@ class SelectTestCategoryTableViewController: UIViewController, UITableViewDelega
 
     @IBOutlet weak var wordsTableView: UITableView!
     @IBOutlet weak var orderingPickerView: UIPickerView!
-    let synonymsList = DatabaseUtility.getAllSynonymObjects()!
+    let synonymsList = DictionaryDatabaseUtility.getAllSynonymObjects()!
     var synonymIndex = 0
     var checkMarkCount = 0
     

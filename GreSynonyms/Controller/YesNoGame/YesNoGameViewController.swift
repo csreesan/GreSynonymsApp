@@ -13,14 +13,15 @@ class YesNoGameViewController: UIViewController, YesNoGameObjectReceiver {
     //MARK: Instance Attributes
     var categories: [String] = []
     var score = 0
-    var currWord = 0
+    var currWordIndex = 0
     var totalWords = 0
     var wordList = [WordObject]()
+    var wordListEncoded: String = ""
     var gameObject: YesNoGameObject?
     var prevViewController: UIViewController?
     var correctWordList: [WordObject] = []
     var wrongWordList: [WordObject] = []
-    var correctIDs: [Int] = []
+    var answerKey: [Int] = []
     
     @IBOutlet weak var yepButton: UIButton!
     @IBOutlet weak var nopeButton: UIButton!
@@ -34,14 +35,34 @@ class YesNoGameViewController: UIViewController, YesNoGameObjectReceiver {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.wordList = (self.gameObject?.shuffledWordList)!
-        self.mainWordLabel.text = self.gameObject?.mainLabel
-        self.changingWordLabel.text = self.wordList[self.currWord].word
-        self.totalWords = self.wordList.count
+        gameSetup()
         self.navigationController?.isNavigationBarHidden = true
         self.nopeButton.layer.cornerRadius = 20
         self.yepButton.layer.cornerRadius = 20
         updateScoreAndProgress()
+        storeProgressToDatabse()
+    }
+    
+    func gameSetup() {
+        self.mainWordLabel.text = self.gameObject?.mainLabel
+        self.changingWordLabel.text = self.wordList[self.currWordIndex].word
+        self.totalWords = self.wordList.count
+        self.wordListEncoded = (self.wordList.map {String($0.id)}).joined(separator: ",")
+        self.answerKey = self.gameObject!.answerKey
+    }
+    
+    func receivedGameObject(gameObject: YesNoGameObject) {
+        self.gameObject = gameObject
+        self.wordList = (self.gameObject?.shuffledWordList)!
+    }
+    
+    func continueGameOverride(gameObject: YesNoGameObject, continueObject: ContinueGameHelperObject) {
+        self.gameObject = gameObject
+        self.wordList = continueObject.wordList
+        self.correctWordList = continueObject.correctWords
+        self.currWordIndex = continueObject.currIndex
+        self.score = continueObject.score
+        self.wrongWordList = continueObject.wrongWords
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,26 +73,31 @@ class YesNoGameViewController: UIViewController, YesNoGameObjectReceiver {
         super.didReceiveMemoryWarning()
     }
     
-    func receivedGameObject(gameObject: YesNoGameObject) {
-        self.gameObject = gameObject
-        self.correctIDs = gameObject.correctIDs
-    }
-    
     func checkAnswer(answerTag: Int) {
+        let result: Int
+        let currentWordObject = self.wordList[self.currWordIndex]
+        let synListIDForLog: [Int]
         if answerTag == correctButtonTag() {
             ProgressHUD.showSuccess("Correct!")
             self.score += 1
-            self.correctWordList.append(self.wordList[self.currWord])
+            self.correctWordList.append(currentWordObject)
+            result = 1
+            synListIDForLog = currentWordObject.getSynonymIDList().filter {self.answerKey.contains($0)}
         } else {
             ProgressHUD.showError("Wrong!")
-            self.wrongWordList.append(self.wordList[self.currWord])
+            self.wrongWordList.append(currentWordObject)
+            result = 0
+            synListIDForLog = self.answerKey
+        }
+        for synID in synListIDForLog {
+            UserDatabaseUtility.insertToAttempts(timeStamp: Date(), synonymID: synID, wordID: currentWordObject.id, result: result)
         }
     }
     
     func correctButtonTag() -> Int{
-        let currWordSynID = self.wordList[self.currWord].getSynonymIDList()
+        let currWordSynID = self.wordList[self.currWordIndex].getSynonymIDList()
         for id in currWordSynID {
-            if self.correctIDs.contains(id) {
+            if self.answerKey.contains(id) {
                 return 1
             }
         }
@@ -80,18 +106,20 @@ class YesNoGameViewController: UIViewController, YesNoGameObjectReceiver {
     
     
     func updateScoreAndProgress() {
-        self.progressBarWidthConstraint.constant = (view.frame.size.width / CGFloat(totalWords)) * CGFloat(self.currWord + 1)
-        let wordNumDisp = (self.currWord + 1 <= self.totalWords) ? self.currWord + 1 : self.totalWords
+        self.progressBarWidthConstraint.constant = (view.frame.size.width / CGFloat(totalWords)) * CGFloat(self.currWordIndex + 1)
+        let wordNumDisp = (self.currWordIndex + 1 <= self.totalWords) ? self.currWordIndex + 1 : self.totalWords
         self.scoreLabel.text = "Score: \(score)"
         self.progressLabel.text = "\(wordNumDisp) out of \(totalWords)"
     }
     
     func nextWord() {
-        self.currWord += 1
+        self.currWordIndex += 1
         updateScoreAndProgress()
-        if self.currWord < self.totalWords {
-            self.changingWordLabel.text = self.wordList[self.currWord].word
+        if self.currWordIndex < self.totalWords {
+            self.changingWordLabel.text = self.wordList[self.currWordIndex].word
+            storeProgressToDatabse()
         } else {
+            storeProgressToDatabse(endGame: true)
             let alert = UIAlertController(title: "Done!", message: "You've finished all the words, with the score of \(score)!", preferredStyle: .alert)
             let restartAction = UIAlertAction(title: "Main Menu", style: .default, handler: {(UIAlertAction) in
                 self.navigationController?.popToRootViewController(animated: true)
@@ -111,10 +139,11 @@ class YesNoGameViewController: UIViewController, YesNoGameObjectReceiver {
     }
     
     @IBAction func mainMenuButtonPressed(_ sender: UIButton) {
-       self.navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func endButtonPressed(_ sender: Any) {
+        storeProgressToDatabse(endGame: true)
         self.goToCategoriesViewController()
     }
     
@@ -126,6 +155,18 @@ class YesNoGameViewController: UIViewController, YesNoGameObjectReceiver {
             let destinationVC = segue.destination as! CateogriesViewController
             destinationVC.receivedCategoryObjectList(categoryList: categoryList)
         }
+    }
+    
+    func storeProgressToDatabse(endGame: Bool=false) {
+        if endGame {
+            UserDatabaseUtility.updateContinue(inProgress: 0, wordList: "", score: 0, mainType: "", mainID: 0, currIndex: 0, correctIDs: "", wrongIDs: "")
+            return
+        }
+        let mainType = self.gameObject!.gameObjectType.rawValue
+        let mainID = self.gameObject!.mainID
+        let rightIDs = (self.correctWordList.map{String($0.id)}).joined(separator: ",")
+        let wrongIDs = (self.wrongWordList.map{String($0.id)}).joined(separator: ",")
+        UserDatabaseUtility.updateContinue(inProgress: 1, wordList: self.wordListEncoded, score: self.score, mainType: mainType, mainID: mainID, currIndex: self.currWordIndex, correctIDs: rightIDs, wrongIDs: wrongIDs)
     }
     
     func goToCategoriesViewController() {

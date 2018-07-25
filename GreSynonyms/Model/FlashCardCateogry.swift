@@ -20,7 +20,7 @@ class SynonymObject: FlashCardCategory {
     let label: String
     init(id: Int) {
         self.id = id
-        self.label = DatabaseUtility.getSynonymLabel(synId: self.id)!
+        self.label = DictionaryDatabaseUtility.getSynonymLabel(synId: self.id)!
     }
     
     func getLabel() -> String {
@@ -28,7 +28,7 @@ class SynonymObject: FlashCardCategory {
     }
     
     func getWords() -> [WordObject] {
-        return DatabaseUtility.getSynonymsFromSynID(synId: self.id)!
+        return DictionaryDatabaseUtility.getSynonymsFromSynID(synId: self.id)!
     }
 }
 
@@ -38,7 +38,7 @@ struct AllWordsCategoryObject: FlashCardCategory {
         return "All Words"
     }
     func getWords() -> [WordObject] {
-        return DatabaseUtility.getAllWords()
+        return DictionaryDatabaseUtility.getAllWords()
     }
 }
 

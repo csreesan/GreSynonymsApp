@@ -24,4 +24,11 @@ class Utility {
         return result
     }
 
+    static func getWordObjectsFromIDList(idList: [Int]) -> [WordObject] {
+        var wordObjects: [WordObject] = []
+        for id in idList {
+            wordObjects.append(DictionaryDatabaseUtility.getWordObjectFromID(id: id)!)
+        }
+        return wordObjects
+    }
 }

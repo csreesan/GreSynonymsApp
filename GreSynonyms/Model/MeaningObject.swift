@@ -22,6 +22,6 @@ class MeaningObject {
     }
     
     func getSynonyms() -> [WordObject] {
-        return DatabaseUtility.getSynonymsFromSynID(synId: self.synonymId)!
+        return DictionaryDatabaseUtility.getSynonymsFromSynID(synId: self.synonymId)!
     }
 }

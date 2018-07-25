@@ -19,19 +19,19 @@ class WordObject {
     }
     
     func getSynonyms() -> [WordObject] {
-        return DatabaseUtility.getSynonymsOfWord(wordId: self.id)!
+        return DictionaryDatabaseUtility.getSynonymsOfWord(wordId: self.id)!
     }
     
     func getSynonymObjectList() -> [SynonymObject] {
         var synonymObjectList: [SynonymObject] = []
-        for synonymID in DatabaseUtility.getSynonymGroupIDList(wordId: self.id)! {
+        for synonymID in DictionaryDatabaseUtility.getSynonymGroupIDList(wordId: self.id)! {
             synonymObjectList.append(SynonymObject(id: synonymID))
         }
         return synonymObjectList
     }
     
     func getMeaningList() -> [MeaningObject] {
-        return DatabaseUtility.getMeaningObjectList(wordId: self.id)!
+        return DictionaryDatabaseUtility.getMeaningObjectList(wordId: self.id)!
     }
     
     func getSynonymIDList() -> [Int] {
