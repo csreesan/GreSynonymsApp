@@ -17,6 +17,7 @@
 		947566132103ED7F0046E612 /* MeaningObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947566122103ED7F0046E612 /* MeaningObject.swift */; };
 		94BB7C822107252000B929BE /* UserDatabaseUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BB7C812107252000B929BE /* UserDatabaseUtility.swift */; };
 		94BB7C842107259600B929BE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BB7C832107259600B929BE /* Constants.swift */; };
+		94BB7C8C2109C10800B929BE /* QueryUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BB7C8B2109C10800B929BE /* QueryUtility.swift */; };
 		94C918D720D8AE2E0049778F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C918D620D8AE2E0049778F /* AppDelegate.swift */; };
 		94C918D920D8AE2E0049778F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C918D820D8AE2E0049778F /* MainViewController.swift */; };
 		94C918DC20D8AE2E0049778F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94C918DA20D8AE2E0049778F /* Main.storyboard */; };
@@ -31,7 +32,6 @@
 		94CB557E21004A4B00031BE7 /* SynonymCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CB557D21004A4B00031BE7 /* SynonymCardViewController.swift */; };
 		94CB558421004F7500031BE7 /* DictionaryDatabaseUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CB558321004F7500031BE7 /* DictionaryDatabaseUtility.swift */; };
 		94CB55862100506700031BE7 /* GreSynonymsDatabase.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 94CB55852100506700031BE7 /* GreSynonymsDatabase.sqlite3 */; };
-		94CB55902100542800031BE7 /* SelectTestCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CB558F2100542800031BE7 /* SelectTestCategoryTableViewController.swift */; };
 		94CF240220EDF0D500BB9249 /* YesNoGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CF240120EDF0D500BB9249 /* YesNoGameViewController.swift */; };
 		94CF240620F1E04D00BB9249 /* WordObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CF240520F1E04D00BB9249 /* WordObject.swift */; };
 		94CF240820F2CCA800BB9249 /* FlashCardCateogry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CF240720F2CCA800BB9249 /* FlashCardCateogry.swift */; };
@@ -81,6 +81,7 @@
 		947566122103ED7F0046E612 /* MeaningObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningObject.swift; sourceTree = "<group>"; };
 		94BB7C812107252000B929BE /* UserDatabaseUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDatabaseUtility.swift; sourceTree = "<group>"; };
 		94BB7C832107259600B929BE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		94BB7C8B2109C10800B929BE /* QueryUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryUtility.swift; sourceTree = "<group>"; };
 		94C918D320D8AE2E0049778F /* GreSynonyms.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreSynonyms.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94C918D620D8AE2E0049778F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94C918D820D8AE2E0049778F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -101,7 +102,6 @@
 		94CB557D21004A4B00031BE7 /* SynonymCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynonymCardViewController.swift; sourceTree = "<group>"; };
 		94CB558321004F7500031BE7 /* DictionaryDatabaseUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryDatabaseUtility.swift; sourceTree = "<group>"; };
 		94CB55852100506700031BE7 /* GreSynonymsDatabase.sqlite3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GreSynonymsDatabase.sqlite3; sourceTree = "<group>"; };
-		94CB558F2100542800031BE7 /* SelectTestCategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTestCategoryTableViewController.swift; sourceTree = "<group>"; };
 		94CF240120EDF0D500BB9249 /* YesNoGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoGameViewController.swift; sourceTree = "<group>"; };
 		94CF240520F1E04D00BB9249 /* WordObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordObject.swift; sourceTree = "<group>"; };
 		94CF240720F2CCA800BB9249 /* FlashCardCateogry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardCateogry.swift; sourceTree = "<group>"; };
@@ -232,6 +232,7 @@
 			children = (
 				94C918D620D8AE2E0049778F /* AppDelegate.swift */,
 				94C918D820D8AE2E0049778F /* MainViewController.swift */,
+				945AFC1C2101CFD200668D68 /* CategoriesViewController.swift */,
 				94CB55912100544500031BE7 /* FlashCard */,
 				94CB558B210053E200031BE7 /* YesNoGame */,
 			);
@@ -257,6 +258,7 @@
 				94CB558321004F7500031BE7 /* DictionaryDatabaseUtility.swift */,
 				94BB7C812107252000B929BE /* UserDatabaseUtility.swift */,
 				94BB7C832107259600B929BE /* Constants.swift */,
+				94BB7C8B2109C10800B929BE /* QueryUtility.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -264,7 +266,6 @@
 		94CB558B210053E200031BE7 /* YesNoGame */ = {
 			isa = PBXGroup;
 			children = (
-				94CB558F2100542800031BE7 /* SelectTestCategoryTableViewController.swift */,
 				94CF240120EDF0D500BB9249 /* YesNoGameViewController.swift */,
 			);
 			path = YesNoGame;
@@ -273,7 +274,6 @@
 		94CB55912100544500031BE7 /* FlashCard */ = {
 			isa = PBXGroup;
 			children = (
-				945AFC1C2101CFD200668D68 /* CategoriesViewController.swift */,
 				94CB55772100499800031BE7 /* FlashCardsTableTableViewController.swift */,
 				94CB5579210049F700031BE7 /* WordsTabBarController.swift */,
 				94CB557B21004A2700031BE7 /* WordMeaningViewController.swift */,
@@ -513,10 +513,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94CB55902100542800031BE7 /* SelectTestCategoryTableViewController.swift in Sources */,
 				94CB557C21004A2700031BE7 /* WordMeaningViewController.swift in Sources */,
 				94CF240620F1E04D00BB9249 /* WordObject.swift in Sources */,
 				94CB557E21004A4B00031BE7 /* SynonymCardViewController.swift in Sources */,
+				94BB7C8C2109C10800B929BE /* QueryUtility.swift in Sources */,
 				947566132103ED7F0046E612 /* MeaningObject.swift in Sources */,
 				94CF240820F2CCA800BB9249 /* FlashCardCateogry.swift in Sources */,
 				94CB557A210049F800031BE7 /* WordsTabBarController.swift in Sources */,

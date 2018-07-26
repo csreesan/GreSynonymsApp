@@ -39,7 +39,36 @@ enum GameObjectType: String {
     case word
 }
 
+enum TableType: String {
+    case categories
+    case words
+    case endOfGame
+}
+
 class Constants {
+    static let categoryPickerLabels = ["Alphabetical", "All Time Correct %", "Recent Correct %", "Correct % When Completed", "By Time Last Attempted", "By Time Last Completed"]
+    static let wordPickerLabels = ["Alphabetical", "All Time Correct %", "Recent Correct %", "Last Time Correct"]
     
+    static let toYesNoGameSegue = "toYesNoGame"
+    static let toWordsSegue = "toWords"
+    static let toCategoryControllerSegue = "toCategoryController"
+    static let toFlashSegue = "toFlash"
+
+    static let flashCardsMainLabel = "Flash Cards"
+    static let categoryToTestLabel = "Choose Cateogry to Test"
+    static let endOfGameLabel = "Game Result"
+}
+
+struct PickerObject {
     
+    let labels: [String]
+    let type: TableType
+    init(type: TableType) {
+        if type == .categories {
+            self.labels = Constants.categoryPickerLabels
+        } else {
+            self.labels = Constants.wordPickerLabels
+        }
+        self.type = type
+    }
 }

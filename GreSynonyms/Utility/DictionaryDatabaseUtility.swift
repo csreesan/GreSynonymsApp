@@ -28,7 +28,7 @@ class DictionaryDatabaseUtility {
     static func getAllWords() -> [WordObject] {
         var wordArr: [WordObject] = []
         do {
-            let words = try self.database!.prepare(self.wordsTable)
+            let words = try self.database!.prepare(self.wordsTable.order(Column.word))
             for word in words {
                 wordArr.append(WordObject(id: word[Column.id], word: word[Column.word]))
             }
@@ -134,7 +134,7 @@ class DictionaryDatabaseUtility {
     static func getAllSynonymObjects() -> [SynonymObject]? {
         do {
             var arr: [SynonymObject] = []
-            let synonyms = try self.database!.prepare(self.synonymsTable)
+            let synonyms = try self.database!.prepare(self.synonymsTable.order(Column.label))
             for synonym in synonyms {
                 arr.append(SynonymObject(id: synonym[Column.id]))
             }

@@ -48,7 +48,7 @@ class FlashCardsTableTableViewController: UITableViewController, WordListReceive
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toFlash" {
+        if segue.identifier == Constants.toFlashSegue {
             let destinationVC = segue.destination as! WordsTabBarController
             destinationVC.receivedWordObject(wordObject: self.wordList[self.indexSelected])
         }
@@ -56,7 +56,23 @@ class FlashCardsTableTableViewController: UITableViewController, WordListReceive
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.indexSelected = indexPath.row
-        performSegue(withIdentifier: "toFlash", sender: self)
+        performSegue(withIdentifier: Constants.toFlashSegue, sender: self)
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return Constants.categoryPickerLabels.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return Constants.categoryPickerLabels[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print(row)
     }
     
     func receivedWordList(wordList: [WordObject]) {

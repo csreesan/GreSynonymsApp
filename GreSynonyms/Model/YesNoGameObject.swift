@@ -10,6 +10,7 @@ import Foundation
 
 class YesNoGameObject {
     
+    let MULTIPLIER = 1.5
     let mainLabel: String
     var shuffledWordList: [WordObject] = []
     var synonymObjectList: [SynonymObject] = []
@@ -50,7 +51,7 @@ class YesNoGameObject {
     func getShuffledWordListFromWordObject(wordObject: WordObject) -> [WordObject] {
         let synonyms = wordObject.getSynonyms()
         let allWordsShuffled = Utility.shuffleWordList(lst: DictionaryDatabaseUtility.getAllWords())
-        let total: Int = Int(Double(synonyms.count) * 1.5)
+        let total: Int = Int(Double(synonyms.count) * MULTIPLIER)
         var wordList = synonyms
         var index = 0
         while wordList.count < total && index < allWordsShuffled.count {
@@ -66,7 +67,7 @@ class YesNoGameObject {
     func getShuffledWordListFromSynonymObject(synonymObject: SynonymObject) -> [WordObject] {
         let synonyms = synonymObject.getWords()
         let allWordsShuffled = Utility.shuffleWordList(lst: DictionaryDatabaseUtility.getAllWords())
-        let total: Int = Int(Double(synonyms.count) * 2.2)
+        let total: Int = Int(Double(synonyms.count) * MULTIPLIER)
         var wordList = synonyms
         var index = 0
         while wordList.count < total && index < allWordsShuffled.count {
@@ -80,7 +81,7 @@ class YesNoGameObject {
     }
 }
 
-class ContinueGameHelperObject {
+struct ContinueGameHelperObject {
     
     let wordList: [WordObject]
     let score: Int

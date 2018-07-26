@@ -8,7 +8,7 @@
 
 import UIKit
 
-class YesNoGameViewController: UIViewController, YesNoGameObjectReceiver {
+class YesNoGameViewController: UIViewController {
     
     //MARK: Instance Attributes
     var categories: [String] = []
@@ -120,7 +120,7 @@ class YesNoGameViewController: UIViewController, YesNoGameObjectReceiver {
             storeProgressToDatabse()
         } else {
             storeProgressToDatabse(endGame: true)
-            let alert = UIAlertController(title: "Done!", message: "You've finished all the words, with the score of \(score)!", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Done!", message: "You've finished all the words, with the score of \(score)/\(totalWords)!", preferredStyle: .alert)
             let restartAction = UIAlertAction(title: "Main Menu", style: .default, handler: {(UIAlertAction) in
                 self.navigationController?.popToRootViewController(animated: true)
             })
@@ -148,12 +148,12 @@ class YesNoGameViewController: UIViewController, YesNoGameObjectReceiver {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toCat" {
+        if segue.identifier == Constants.toCategoryControllerSegue {
             var categoryList : [FlashCardCategory] = self.gameObject!.synonymObjectList
             categoryList.append(SpecialCateogryObject(isCorrect: true, wordList: self.correctWordList))
             categoryList.append(SpecialCateogryObject(isCorrect: false, wordList: self.wrongWordList))
             let destinationVC = segue.destination as! CateogriesViewController
-            destinationVC.receivedCategoryObjectList(categoryList: categoryList)
+            destinationVC.prepareCategoryController(categoryList: categoryList, segueID: Constants.toWordsSegue, label: Constants.endOfGameLabel, pickerObject: PickerObject(type: .endOfGame))
         }
     }
     
@@ -170,7 +170,7 @@ class YesNoGameViewController: UIViewController, YesNoGameObjectReceiver {
     }
     
     func goToCategoriesViewController() {
-        performSegue(withIdentifier: "toCat", sender: self)
+        performSegue(withIdentifier: Constants.toCategoryControllerSegue, sender: self)
     }
     
 }

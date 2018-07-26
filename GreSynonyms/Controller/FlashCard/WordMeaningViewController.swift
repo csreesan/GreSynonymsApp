@@ -68,7 +68,7 @@ class WordMeaningViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == toYesNoGameSeagueIdentifier {
+        if segue.identifier == Constants.toYesNoGameSegue {
             let gameVC = segue.destination as! YesNoGameViewController
             gameVC.receivedGameObject(gameObject: YesNoGameObject(wordObject: self.wordObject!))
         }

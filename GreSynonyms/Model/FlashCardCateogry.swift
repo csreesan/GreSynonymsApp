@@ -12,15 +12,18 @@ import Foundation
 protocol FlashCardCategory {
     func getLabel() -> String
     func getWords() -> [WordObject]
+    var stat: String {get}
 }
 
 
 class SynonymObject: FlashCardCategory {
     let id: Int
     let label: String
-    init(id: Int) {
+    var stat: String
+    init(id: Int, stat: String="") {
         self.id = id
         self.label = DictionaryDatabaseUtility.getSynonymLabel(synId: self.id)!
+        self.stat = stat
     }
     
     func getLabel() -> String {
@@ -33,7 +36,7 @@ class SynonymObject: FlashCardCategory {
 }
 
 struct AllWordsCategoryObject: FlashCardCategory {
-    
+    var stat: String = ""
     func getLabel() -> String {
         return "All Words"
     }
@@ -43,11 +46,11 @@ struct AllWordsCategoryObject: FlashCardCategory {
 }
 
 class SpecialCateogryObject: FlashCardCategory {
-    
+    let stat:String = ""
     let label: String
     let wordList: [WordObject]
     init(isCorrect: Bool, wordList: [WordObject]) {
-        self.label = isCorrect ? "Your Hit": "Your Miss"
+        self.label = isCorrect ? "Your Hits": "Your Misses"
         self.wordList = wordList
     }
     
@@ -59,3 +62,4 @@ class SpecialCateogryObject: FlashCardCategory {
         return self.wordList
     }
 }
+

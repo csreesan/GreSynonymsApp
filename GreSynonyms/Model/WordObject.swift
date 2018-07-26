@@ -8,13 +8,16 @@
 
 import Foundation
 
-class WordObject {
+class WordObject: FlashCardCategory {
+    
     let id: Int
     let word: String
+    var stat: String
     var meaningList: [MeaningObject] = []
-    init(id: Int, word: String) {
+    init(id: Int, word: String, stat:String="") {
         self.id = id
         self.word = word
+        self.stat = stat
         self.meaningList = getMeaningList()
     }
     
@@ -36,5 +39,14 @@ class WordObject {
     
     func getSynonymIDList() -> [Int] {
         return getSynonymObjectList().map {$0.id}
+    }
+    
+    // Flash Category
+    func getWords() -> [WordObject] {
+        return []
+    }
+    
+    func getLabel() -> String {
+        return self.word
     }
 }

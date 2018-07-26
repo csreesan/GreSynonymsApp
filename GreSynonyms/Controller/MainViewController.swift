@@ -9,9 +9,6 @@
 import UIKit
 import SQLite
 
-protocol CategoryObjectListReceiver {
-    func receivedCategoryObjectList(categoryList: [FlashCardCategory])
-}
 
 class MainViewController: UIViewController {
     
@@ -19,6 +16,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var contButton: UIButton!
     var yesNoGameObject: YesNoGameObject?
     var continueGameObject: ContinueGameHelperObject?
+    var sendingSegue: String = ""
+    var sendingLabel: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,28 +38,31 @@ class MainViewController: UIViewController {
     }
 
     @IBAction func yeahNahButtonPushed(_ sender: UIButton) {
-        performSegue(withIdentifier: "toYesNoCateogrySelection", sender: self)
+        self.sendingSegue = Constants.toYesNoGameSegue
+        self.sendingLabel = Constants.categoryToTestLabel
+        performSegue(withIdentifier: Constants.toCategoryControllerSegue, sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toCat" {
-            var categoryList : [FlashCardCategory] = [AllWordsCategoryObject()]
-            categoryList.append(contentsOf: DictionaryDatabaseUtility.getAllSynonymObjects()!)
+        if segue.identifier == Constants.toCategoryControllerSegue {
+            let categoryList = DictionaryDatabaseUtility.getAllSynonymObjects()!
             let destinationVC = segue.destination as! CateogriesViewController
-            destinationVC.receivedCategoryObjectList(categoryList: categoryList)
+            destinationVC.prepareCategoryController(categoryList: categoryList, segueID: self.sendingSegue, label: self.sendingLabel, pickerObject: PickerObject(type: .categories))
         }
-        if segue.identifier == "toYesNoGame" {
+        if segue.identifier == Constants.toYesNoGameSegue {
             let destinationVC = segue.destination as! YesNoGameViewController
             destinationVC.continueGameOverride(gameObject: self.yesNoGameObject!, continueObject: self.continueGameObject!)
         }
     }
     
     @IBAction func flashButtonPushed(_ sender: UIButton) {
-        performSegue(withIdentifier: "toCat", sender: self)
+        self.sendingSegue = Constants.toWordsSegue
+        self.sendingLabel = Constants.flashCardsMainLabel
+        performSegue(withIdentifier: Constants.toCategoryControllerSegue, sender: self)
     }
     
     @IBAction func contButtonPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "toYesNoGame", sender: self)
+        performSegue(withIdentifier: Constants.toYesNoGameSegue, sender: self)
     }
     
     
