@@ -25,6 +25,7 @@ class WordMeaningViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
         self.wordLabel.text = wordObject!.word
         self.meaningObjectList = self.wordObject?.getMeaningList()
         updateUI()

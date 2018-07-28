@@ -22,8 +22,8 @@ CREATE TABLE meanings (
 
 INSERT INTO synonyms(id, label)
 VALUES
-	(1, "Criticize or Express Disapproval of (v.)"),
-	(2, "Verbal, Written Attack or Criticsm (n.)"),
+	(1, "Criticize/Express Disapproval of (v.)"),
+	(2, "Verbal/Written Attack or Criticsm (n.)"),
 	(3, "Trickery, or Being Deceitful"),
 	(4, "Hesitate in Choice or Opinion");
 

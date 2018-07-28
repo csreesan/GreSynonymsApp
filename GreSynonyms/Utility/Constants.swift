@@ -9,7 +9,7 @@
 import Foundation
 import SQLite
 
-class Column {
+struct Column {
     static let id = Expression<Int>("id")
     static let word = Expression<String>("word")
     static let part_of_speech = Expression<String>("part_of_speech")
@@ -32,22 +32,27 @@ class Column {
     static let result = Expression<Int>("result")
     
     static let latest_time = Expression<Date>("latest_time")
+    
+    static let correct_num = Expression<Int>("correct_num")
+    static let total_num = Expression<Int>("total_num")
  }
 
-enum GameObjectType: String {
-    case synonym
-    case word
+
+struct PickerObject {
+    
+    let labels: [String]
+    let type: TableType
+    init(type: TableType) {
+        if type == .synonyms {
+            self.labels = SynonymPickerOptions.labels
+        } else {
+            self.labels = WordPickerOptions.labels
+        }
+        self.type = type
+    }
 }
 
-enum TableType: String {
-    case categories
-    case words
-    case endOfGame
-}
-
-class Constants {
-    static let categoryPickerLabels = ["Alphabetical", "All Time Correct %", "Recent Correct %", "Correct % When Completed", "By Time Last Attempted", "By Time Last Completed"]
-    static let wordPickerLabels = ["Alphabetical", "All Time Correct %", "Recent Correct %", "Last Time Correct"]
+struct Constants {
     
     static let toYesNoGameSegue = "toYesNoGame"
     static let toWordsSegue = "toWords"
@@ -57,18 +62,7 @@ class Constants {
     static let flashCardsMainLabel = "Flash Cards"
     static let categoryToTestLabel = "Choose Cateogry to Test"
     static let endOfGameLabel = "Game Result"
+    static let allWordsLabel = "All Words"
 }
 
-struct PickerObject {
-    
-    let labels: [String]
-    let type: TableType
-    init(type: TableType) {
-        if type == .categories {
-            self.labels = Constants.categoryPickerLabels
-        } else {
-            self.labels = Constants.wordPickerLabels
-        }
-        self.type = type
-    }
-}
+

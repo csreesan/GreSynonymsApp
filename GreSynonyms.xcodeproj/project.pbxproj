@@ -18,6 +18,8 @@
 		94BB7C822107252000B929BE /* UserDatabaseUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BB7C812107252000B929BE /* UserDatabaseUtility.swift */; };
 		94BB7C842107259600B929BE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BB7C832107259600B929BE /* Constants.swift */; };
 		94BB7C8C2109C10800B929BE /* QueryUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BB7C8B2109C10800B929BE /* QueryUtility.swift */; };
+		94BB7C8E210A8CAA00B929BE /* SQLStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BB7C8D210A8CAA00B929BE /* SQLStrings.swift */; };
+		94BB7C90210A964A00B929BE /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BB7C8F210A964A00B929BE /* Enums.swift */; };
 		94C918D720D8AE2E0049778F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C918D620D8AE2E0049778F /* AppDelegate.swift */; };
 		94C918D920D8AE2E0049778F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C918D820D8AE2E0049778F /* MainViewController.swift */; };
 		94C918DC20D8AE2E0049778F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94C918DA20D8AE2E0049778F /* Main.storyboard */; };
@@ -82,6 +84,8 @@
 		94BB7C812107252000B929BE /* UserDatabaseUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDatabaseUtility.swift; sourceTree = "<group>"; };
 		94BB7C832107259600B929BE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		94BB7C8B2109C10800B929BE /* QueryUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryUtility.swift; sourceTree = "<group>"; };
+		94BB7C8D210A8CAA00B929BE /* SQLStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLStrings.swift; sourceTree = "<group>"; };
+		94BB7C8F210A964A00B929BE /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		94C918D320D8AE2E0049778F /* GreSynonyms.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreSynonyms.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94C918D620D8AE2E0049778F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94C918D820D8AE2E0049778F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -255,10 +259,12 @@
 			isa = PBXGroup;
 			children = (
 				94C9190C20D8B0700049778F /* Utility.swift */,
+				94BB7C8F210A964A00B929BE /* Enums.swift */,
 				94CB558321004F7500031BE7 /* DictionaryDatabaseUtility.swift */,
 				94BB7C812107252000B929BE /* UserDatabaseUtility.swift */,
 				94BB7C832107259600B929BE /* Constants.swift */,
 				94BB7C8B2109C10800B929BE /* QueryUtility.swift */,
+				94BB7C8D210A8CAA00B929BE /* SQLStrings.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -515,7 +521,9 @@
 			files = (
 				94CB557C21004A2700031BE7 /* WordMeaningViewController.swift in Sources */,
 				94CF240620F1E04D00BB9249 /* WordObject.swift in Sources */,
+				94BB7C90210A964A00B929BE /* Enums.swift in Sources */,
 				94CB557E21004A4B00031BE7 /* SynonymCardViewController.swift in Sources */,
+				94BB7C8E210A8CAA00B929BE /* SQLStrings.swift in Sources */,
 				94BB7C8C2109C10800B929BE /* QueryUtility.swift in Sources */,
 				947566132103ED7F0046E612 /* MeaningObject.swift in Sources */,
 				94CF240820F2CCA800BB9249 /* FlashCardCateogry.swift in Sources */,

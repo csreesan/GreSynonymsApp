@@ -52,6 +52,7 @@ class CateogriesViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = categoryTableView.dequeueReusableCell(withIdentifier: "Cell")
         cell?.textLabel?.text = categories[indexPath.row].getLabel()
+        cell?.detailTextLabel?.text = categories[indexPath.row].stat
         return cell!
     }
     
@@ -73,7 +74,8 @@ class CateogriesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(row)
+        self.categories = QueryUtility.getOrderedFlashCardObjects(type: self.pickerObject!.type, pickerLabel: self.pickerObject!.labels[row])
+        self.categoryTableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -87,7 +89,7 @@ class CateogriesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         if segue.identifier == Constants.toFlashSegue {
             let destinationVC = segue.destination as! WordsTabBarController
-            destinationVC.receivedWordObject(wordObject: self.categories[self.chosenIndex].getWords()[0])
+            destinationVC.receivedWordObject(wordObject: self.categories[self.chosenIndex] as! WordObject)
         }
     }
     

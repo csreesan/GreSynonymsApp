@@ -24,11 +24,10 @@ class DictionaryDatabaseUtility {
     static let synonymsTable = Table("synonyms")
     static let meaningsTable = Table("meanings")
     
-    
     static func getAllWords() -> [WordObject] {
         var wordArr: [WordObject] = []
         do {
-            let words = try self.database!.prepare(self.wordsTable.order(Column.word))
+            let words = try database!.prepare(wordsTable.order(Column.word))
             for word in words {
                 wordArr.append(WordObject(id: word[Column.id], word: word[Column.word]))
             }
@@ -41,8 +40,8 @@ class DictionaryDatabaseUtility {
     static func getMeaningObjectList(wordId: Int) -> [MeaningObject]? {
         do {
             var meaningArr: [MeaningObject] = []
-            let meaningsForWord = self.meaningsTable.where(wordId == Column.word_id)
-            let meaningRows = try self.database!.prepare(meaningsForWord)
+            let meaningsForWord = meaningsTable.where(wordId == Column.word_id)
+            let meaningRows = try database!.prepare(meaningsForWord)
             for meaningRow in meaningRows {
                 meaningArr.append(MeaningObject(partOfSpeech: meaningRow[Column.part_of_speech], meaning: meaningRow[Column.meaning], example: meaningRow[Column.example], synonymId: meaningRow[Column.synonym_id]))
             }
@@ -58,11 +57,17 @@ class DictionaryDatabaseUtility {
         guard let synGroupIDs = getSynonymGroupIDList(wordId: wordId) else {
             return nil
         }
+        var seenID = Set<Int>()
         for synID in synGroupIDs {
             guard let synonyms = getSynonymsFromSynID(synId: synID, excludeWordId: wordId) else {
                 return nil
             }
-            synonymsList.append(contentsOf: synonyms)
+            for synonym in synonyms {
+                if !seenID.contains(synonym.id) {
+                    seenID.insert(synonym.id)
+                    synonymsList.append(synonym)
+                }
+            }
         }
         return synonymsList
     }
@@ -72,12 +77,12 @@ class DictionaryDatabaseUtility {
         var wordArr: [WordObject] = []
         let meaningsRows: Table
         if let excludeWordId = excludeWordId {
-            meaningsRows = self.meaningsTable.where(Column.synonym_id == synId && Column.word_id != excludeWordId)
+            meaningsRows = meaningsTable.where(Column.synonym_id == synId && Column.word_id != excludeWordId).join(wordsTable, on: Column.id == Column.word_id)
         } else {
-            meaningsRows = self.meaningsTable.where(Column.synonym_id == synId)
+            meaningsRows = meaningsTable.where(Column.synonym_id == synId).join(wordsTable, on: Column.id == Column.word_id)
         }
         do {
-            let meanings = try self.database!.prepare(meaningsRows)
+            let meanings = try database!.prepare(meaningsRows.order(Column.word))
             for meaning in meanings {
                 let id = meaning[Column.word_id]
                 if !wordIDSet.contains(id) {
@@ -93,9 +98,9 @@ class DictionaryDatabaseUtility {
     }
     
     static func getSynonymLabel(synId: Int) -> String? {
-        let synonymRowTable = self.synonymsTable.where(Column.id == synId)
+        let synonymRowTable = synonymsTable.where(Column.id == synId)
         do {
-            let synonymRow = try self.database!.pluck(synonymRowTable)
+            let synonymRow = try database!.pluck(synonymRowTable)
             return synonymRow![Column.label]
         } catch {
             print(error)
@@ -106,8 +111,8 @@ class DictionaryDatabaseUtility {
     static func getSynonymGroupIDList(wordId: Int) -> [Int]? {
         do {
             var synonymGroupArr: [Int] = []
-            let meaningsForWords = self.meaningsTable.where(Column.word_id == wordId)
-            let meaningRows = try self.database!.prepare(meaningsForWords)
+            let meaningsForWords = meaningsTable.where(Column.word_id == wordId)
+            let meaningRows = try database!.prepare(meaningsForWords)
             for meaningRow in meaningRows {
                 synonymGroupArr.append(meaningRow[Column.synonym_id])
             }
@@ -120,8 +125,8 @@ class DictionaryDatabaseUtility {
     
     static func getWordObjectFromID(id: Int) -> WordObject? {
         do {
-            let wordRowQuery = self.wordsTable.where(wordsTable[Column.id] == id)
-            guard let wordRow = try self.database!.pluck(wordRowQuery) else {
+            let wordRowQuery = wordsTable.where(wordsTable[Column.id] == id)
+            guard let wordRow = try database!.pluck(wordRowQuery) else {
                 throw databaseError.noResultRows
             }
             return WordObject(id: wordRow[Column.id], word: wordRow[Column.word])
@@ -131,10 +136,23 @@ class DictionaryDatabaseUtility {
         }
     }
     
+    static func getWordStringFromID(id: Int) -> String? {
+        do {
+            let wordRowQuery = wordsTable.where(wordsTable[Column.id] == id)
+            guard let wordRow = try database!.pluck(wordRowQuery) else {
+                throw databaseError.noResultRows
+            }
+            return wordRow[Column.word]
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+    
     static func getAllSynonymObjects() -> [SynonymObject]? {
         do {
             var arr: [SynonymObject] = []
-            let synonyms = try self.database!.prepare(self.synonymsTable.order(Column.label))
+            let synonyms = try database!.prepare(synonymsTable.order(Column.label))
             for synonym in synonyms {
                 arr.append(SynonymObject(id: synonym[Column.id]))
             }

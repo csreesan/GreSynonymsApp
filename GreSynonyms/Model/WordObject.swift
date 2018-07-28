@@ -14,9 +14,17 @@ class WordObject: FlashCardCategory {
     let word: String
     var stat: String
     var meaningList: [MeaningObject] = []
-    init(id: Int, word: String, stat:String="") {
+    
+    init(id: Int, word: String) {
         self.id = id
         self.word = word
+        self.stat = ""
+        self.meaningList = getMeaningList()
+    }
+    
+    init(id: Int, stat: String) {
+        self.id = id
+        self.word = DictionaryDatabaseUtility.getWordStringFromID(id: id)!
         self.stat = stat
         self.meaningList = getMeaningList()
     }

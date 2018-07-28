@@ -46,12 +46,13 @@ struct AllWordsCategoryObject: FlashCardCategory {
 }
 
 class SpecialCateogryObject: FlashCardCategory {
-    let stat:String = ""
+    let stat:String
     let label: String
     let wordList: [WordObject]
-    init(isCorrect: Bool, wordList: [WordObject]) {
-        self.label = isCorrect ? "Your Hits": "Your Misses"
+    init(type: SpecialCateogryType, wordList: [WordObject]) {
+        self.label = type.rawValue
         self.wordList = wordList
+        self.stat = String(wordList.count)
     }
     
     func getLabel() -> String {

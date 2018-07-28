@@ -10,7 +10,7 @@ import Foundation
 
 class YesNoGameObject {
     
-    let MULTIPLIER = 1.5
+    let MULTIPLIER = 2.1
     let mainLabel: String
     var shuffledWordList: [WordObject] = []
     var synonymObjectList: [SynonymObject] = []

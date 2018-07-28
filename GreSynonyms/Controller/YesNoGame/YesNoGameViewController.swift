@@ -120,6 +120,7 @@ class YesNoGameViewController: UIViewController {
             storeProgressToDatabse()
         } else {
             storeProgressToDatabse(endGame: true)
+            insertToCompletedGamesTable()
             let alert = UIAlertController(title: "Done!", message: "You've finished all the words, with the score of \(score)/\(totalWords)!", preferredStyle: .alert)
             let restartAction = UIAlertAction(title: "Main Menu", style: .default, handler: {(UIAlertAction) in
                 self.navigationController?.popToRootViewController(animated: true)
@@ -149,9 +150,15 @@ class YesNoGameViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.toCategoryControllerSegue {
-            var categoryList : [FlashCardCategory] = self.gameObject!.synonymObjectList
-            categoryList.append(SpecialCateogryObject(isCorrect: true, wordList: self.correctWordList))
-            categoryList.append(SpecialCateogryObject(isCorrect: false, wordList: self.wrongWordList))
+            let synList = self.gameObject!.synonymObjectList
+            for syn in synList {
+                syn.stat = String(syn.getWords().count)
+            }
+            var categoryList : [FlashCardCategory] = synList
+            let allChallenges: ArraySlice<WordObject> = self.wordList[..<self.currWordIndex]
+            categoryList.append(SpecialCateogryObject(type: .yourChallenges, wordList: Array(allChallenges)))
+            categoryList.append(SpecialCateogryObject(type: .yourHits, wordList: self.correctWordList))
+            categoryList.append(SpecialCateogryObject(type: .yourMisses, wordList: self.wrongWordList))
             let destinationVC = segue.destination as! CateogriesViewController
             destinationVC.prepareCategoryController(categoryList: categoryList, segueID: Constants.toWordsSegue, label: Constants.endOfGameLabel, pickerObject: PickerObject(type: .endOfGame))
         }
@@ -171,6 +178,21 @@ class YesNoGameViewController: UIViewController {
     
     func goToCategoriesViewController() {
         performSegue(withIdentifier: Constants.toCategoryControllerSegue, sender: self)
+    }
+    
+    func insertToCompletedGamesTable() {
+        let answerKeySet = Set(self.answerKey)
+        let trickWords = self.wordList.filter {(Set($0.getSynonymIDList()).intersection(answerKeySet)).count <= 0}
+        let correcIdSet = Set(self.correctWordList.map {$0.id})
+        let trickWordsIdSet = Set(trickWords.map {$0.id})
+        let trueNegativeCount = (correcIdSet.intersection(trickWordsIdSet)).count
+        for synID in self.answerKey {
+            let allPositiveCount = (self.wordList.filter {$0.getSynonymIDList().contains(synID)}).count
+            let truePositiveCount = (self.correctWordList.filter {$0.getSynonymIDList().contains(synID)}).count
+            let totalNum = allPositiveCount + trickWords.count
+            let correctNum = trueNegativeCount + truePositiveCount
+            UserDatabaseUtility.insertToCompletedGames(timeStamp: Date(), synonymID: synID, correctNum: correctNum, totalNum: totalNum)
+        }
     }
     
 }

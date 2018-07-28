@@ -15,10 +15,16 @@ class UserDatabaseUtility {
     
     static let continueTable = Table("continue")
     static let attemptsTable = Table("attempts")
-    
+    static let completedGamesTable = Table("completed_games")
     
     static func createUserTables() {
-        let createContinueTable = UserDatabaseUtility.continueTable.create { (table) in
+        createContinueTable()
+        createAttemptsTable()
+        createCompletedGamesTable()
+    }
+    
+    static func createContinueTable() {
+        let createContinueTable = continueTable.create { (table) in
             table.column(Column.in_progress)
             table.column(Column.word_list)
             table.column(Column.score)
@@ -35,11 +41,10 @@ class UserDatabaseUtility {
         } catch {
             print(error)
         }
-        createAttemptsTable()
     }
     
     static func createAttemptsTable() {
-        let createAttemptsTable = UserDatabaseUtility.attemptsTable.create { (table) in
+        let createAttemptsTable = attemptsTable.create { (table) in
             table.column(Column.timestamp)
             table.column(Column.synonym_id)
             table.column(Column.word_id)
@@ -54,10 +59,27 @@ class UserDatabaseUtility {
             print(error)
         }
     }
-    static func insertToContinue(inProgress: Int, wordList: String, score: Int, mainType: String, mainID: Int, currID: Int, correctIDs: String, wrongIDs: String) {
-        let insertContinue = self.continueTable.insert(Column.in_progress <- inProgress, Column.main_type <- mainType, Column.word_list <- wordList, Column.score <- score, Column.main_id <- mainID, Column.curr_index <- currID, Column.correct_ids <- correctIDs, Column.wrong_ids <- wrongIDs)
+    
+    static func createCompletedGamesTable() {
+        let createCompletedGamesTable = completedGamesTable.create { (table) in
+            table.column(Column.timestamp)
+            table.column(Column.synonym_id)
+            table.column(Column.correct_num)
+            table.column(Column.total_num)
+        }
+        
         do {
-            try UserDatabaseUtility.database!.run(insertContinue)
+            try database!.run(createCompletedGamesTable)
+            print("complete_games table created!!")
+        } catch {
+            print(error)
+        }
+    }
+    
+    static func insertToContinue(inProgress: Int, wordList: String, score: Int, mainType: String, mainID: Int, currID: Int, correctIDs: String, wrongIDs: String) {
+        let insertContinue = continueTable.insert(Column.in_progress <- inProgress, Column.main_type <- mainType, Column.word_list <- wordList, Column.score <- score, Column.main_id <- mainID, Column.curr_index <- currID, Column.correct_ids <- correctIDs, Column.wrong_ids <- wrongIDs)
+        do {
+            try database!.run(insertContinue)
             print("Insert into cont!")
         } catch {
             print(error)
@@ -65,9 +87,9 @@ class UserDatabaseUtility {
     }
     
     static func insertToAttempts(timeStamp: Date, synonymID: Int, wordID: Int, result: Int) {
-        let insertAttempt = UserDatabaseUtility.attemptsTable.insert(Column.timestamp <- timeStamp, Column.synonym_id <- synonymID, Column.word_id <- wordID, Column.result <- result)
+        let insertAttempt = attemptsTable.insert(Column.timestamp <- timeStamp, Column.synonym_id <- synonymID, Column.word_id <- wordID, Column.result <- result)
         do {
-            try UserDatabaseUtility.database!.run(insertAttempt)
+            try database!.run(insertAttempt)
             print("Insert into attempt!")
         } catch {
             print(error)
@@ -75,7 +97,7 @@ class UserDatabaseUtility {
     }
     
     static func updateContinue(inProgress: Int, wordList: String, score: Int, mainType: String, mainID: Int, currIndex: Int, correctIDs: String, wrongIDs: String) {
-        let updateContinue = UserDatabaseUtility.continueTable.update(Column.in_progress <- inProgress, Column.main_type <- mainType, Column.word_list <- wordList, Column.score <- score, Column.main_id <- mainID, Column.curr_index <- currIndex, Column.correct_ids <- correctIDs, Column.wrong_ids <- wrongIDs)
+        let updateContinue = continueTable.update(Column.in_progress <- inProgress, Column.main_type <- mainType, Column.word_list <- wordList, Column.score <- score, Column.main_id <- mainID, Column.curr_index <- currIndex, Column.correct_ids <- correctIDs, Column.wrong_ids <- wrongIDs)
         do {
             try UserDatabaseUtility.database!.run(updateContinue)
             print("UPATE CONT!")
@@ -84,9 +106,19 @@ class UserDatabaseUtility {
         }
     }
     
+    static func insertToCompletedGames(timeStamp: Date, synonymID: Int, correctNum: Int, totalNum: Int) {
+        let insertCompletedGame = completedGamesTable.insert(Column.timestamp <- timeStamp, Column.synonym_id <- synonymID, Column.correct_num <- correctNum, Column.total_num <- totalNum)
+        do {
+            try database!.run(insertCompletedGame)
+            print("Insert into attempt!")
+        } catch {
+            print(error)
+        }
+    }
+    
     static func getGameProgress() -> (Bool, [Int], Int, String, Int, Int, [Int], [Int])   {
         do {
-            let cont = try UserDatabaseUtility.database!.pluck(UserDatabaseUtility.continueTable)
+            let cont = try database!.pluck(continueTable)
             let inProgress = cont![Column.in_progress] == 1
             let wordList = (cont![Column.word_list].split(separator: ",")).map {Int($0)!}
             let score = cont![Column.score]
@@ -103,25 +135,13 @@ class UserDatabaseUtility {
     }
     
     static func restartAttemptsTable() {
-        let dropAttemptsTable = UserDatabaseUtility.attemptsTable.drop()
+        let dropAttemptsTable = attemptsTable.drop()
         do {
-            try UserDatabaseUtility.database!.run(dropAttemptsTable)
+            try database!.run(dropAttemptsTable)
             print("DROP Attempts table??")
         } catch {
             print(error)
         }
         createAttemptsTable()
-    }
-    
-    static func getSynonymOrderByLastestTime() {
-        do {
-            let latestTimes = try database!.prepare("SELECT synonym_id, MIN((julianday('now') - julianday(timestamp)) * 24 * 60) as latest_time FROM attempts GROUP BY synonym_id ORDER BY latest_time DESC")
-            for latest in latestTimes {
-                print("syn_id: \(latest[0]!), time: \(latest[1]!)")
-            }
-            
-        } catch {
-            print(error)
-        }
     }
 }

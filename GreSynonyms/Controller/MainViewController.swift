@@ -45,9 +45,17 @@ class MainViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.toCategoryControllerSegue {
-            let categoryList = DictionaryDatabaseUtility.getAllSynonymObjects()!
+            let categoryList: [FlashCardCategory]
+            let tableType: TableType
+            if self.sendingLabel == Constants.allWordsLabel {
+                categoryList = DictionaryDatabaseUtility.getAllWords()
+                tableType = .words
+            } else {
+                categoryList = DictionaryDatabaseUtility.getAllSynonymObjects()!
+                tableType = .synonyms
+            }
             let destinationVC = segue.destination as! CateogriesViewController
-            destinationVC.prepareCategoryController(categoryList: categoryList, segueID: self.sendingSegue, label: self.sendingLabel, pickerObject: PickerObject(type: .categories))
+            destinationVC.prepareCategoryController(categoryList: categoryList, segueID: self.sendingSegue, label: self.sendingLabel, pickerObject: PickerObject(type: tableType))
         }
         if segue.identifier == Constants.toYesNoGameSegue {
             let destinationVC = segue.destination as! YesNoGameViewController
@@ -63,6 +71,12 @@ class MainViewController: UIViewController {
     
     @IBAction func contButtonPressed(_ sender: UIButton) {
         performSegue(withIdentifier: Constants.toYesNoGameSegue, sender: self)
+    }
+    
+    @IBAction func allWordsButtonPressed(_ sender: UIButton) {
+        self.sendingSegue = Constants.toFlashSegue
+        self.sendingLabel = Constants.allWordsLabel
+        performSegue(withIdentifier: Constants.toCategoryControllerSegue, sender: self)
     }
     
     
