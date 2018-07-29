@@ -35,16 +35,6 @@ class SynonymObject: FlashCardCategory {
     }
 }
 
-struct AllWordsCategoryObject: FlashCardCategory {
-    var stat: String = ""
-    func getLabel() -> String {
-        return "All Words"
-    }
-    func getWords() -> [WordObject] {
-        return DictionaryDatabaseUtility.getAllWords()
-    }
-}
-
 class SpecialCateogryObject: FlashCardCategory {
     let stat:String
     let label: String
