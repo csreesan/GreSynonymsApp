@@ -8,14 +8,15 @@
 
 import UIKit
 
-class WordsTabBarController: UITabBarController, WordObjectReceiver {
+class WordsTabBarController: UITabBarController, WordListAndIndexReceiver {
 
-    var wordObject: WordObject?
+    var wordList: [WordObject] = []
+    var index: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         let wordMeaningVC = self.viewControllers![0] as! WordMeaningViewController
         let synonymVC = self.viewControllers![1] as! SynonymCardViewController
-        wordMeaningVC.setWordObjectAndSynonymVC(wordObject: wordObject!, synonymVC: synonymVC)
+        wordMeaningVC.setWordListAndIndexAndVC(wordList: self.wordList, index: index, synonymVC: synonymVC)
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,8 +24,8 @@ class WordsTabBarController: UITabBarController, WordObjectReceiver {
         // Dispose of any resources that can be recreated.
     }
     
-    func receivedWordObject(wordObject: WordObject) {
-        self.wordObject = wordObject
+    func receivedWordListAndIndex(wordList: [WordObject], index: Int) {
+        self.wordList = wordList
+        self.index = index
     }
-
 }

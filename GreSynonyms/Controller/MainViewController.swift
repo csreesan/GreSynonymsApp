@@ -79,6 +79,9 @@ class MainViewController: UIViewController {
         performSegue(withIdentifier: Constants.toCategoryControllerSegue, sender: self)
     }
     
+    @IBAction func howToButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: Constants.toHowToSegue, sender: self)
+    }
     
     func checkProgress() {
         let (inProgress, wordList, score, mainType, mainID, currIndex, correctIDs, wrongIDs) = UserDatabaseUtility.getGameProgress()

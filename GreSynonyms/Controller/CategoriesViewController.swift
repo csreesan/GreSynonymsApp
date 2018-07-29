@@ -11,6 +11,20 @@ import Foundation
 protocol WordListReceiver {
     func receivedWordList(wordList: [WordObject])
 }
+
+struct PickerObject {
+    let labels: [String]
+    let type: TableType
+    init(type: TableType) {
+        if type == .synonyms {
+            self.labels = SynonymPickerOptions.labels
+        } else {
+            self.labels = WordPickerOptions.labels
+        }
+        self.type = type
+    }
+}
+
 class CateogriesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet weak var mainLabel: UILabel!
@@ -89,7 +103,7 @@ class CateogriesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         if segue.identifier == Constants.toFlashSegue {
             let destinationVC = segue.destination as! WordsTabBarController
-            destinationVC.receivedWordObject(wordObject: self.categories[self.chosenIndex] as! WordObject)
+            destinationVC.receivedWordListAndIndex(wordList: self.categories as! [WordObject], index: self.chosenIndex)
         }
     }
     

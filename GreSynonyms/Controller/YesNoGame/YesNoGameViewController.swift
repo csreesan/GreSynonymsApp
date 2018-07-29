@@ -156,9 +156,9 @@ class YesNoGameViewController: UIViewController {
             }
             var categoryList : [FlashCardCategory] = synList
             let allChallenges: ArraySlice<WordObject> = self.wordList[..<self.currWordIndex]
-            categoryList.append(SpecialCateogryObject(type: .yourChallenges, wordList: Array(allChallenges)))
-            categoryList.append(SpecialCateogryObject(type: .yourHits, wordList: self.correctWordList))
-            categoryList.append(SpecialCateogryObject(type: .yourMisses, wordList: self.wrongWordList))
+            categoryList.append(SpecialCateogryObject(type: .allQuestions, wordList: Array(allChallenges)))
+            categoryList.append(SpecialCateogryObject(type: .correct, wordList: self.correctWordList))
+            categoryList.append(SpecialCateogryObject(type: .wrong, wordList: self.wrongWordList))
             let destinationVC = segue.destination as! CateogriesViewController
             destinationVC.prepareCategoryController(categoryList: categoryList, segueID: Constants.toWordsSegue, label: Constants.endOfGameLabel, pickerObject: PickerObject(type: .endOfGame))
         }

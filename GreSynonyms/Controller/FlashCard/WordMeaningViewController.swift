@@ -18,22 +18,27 @@ class WordMeaningViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var prevButton: UIButton!
     
-    var meaningObjectList: [MeaningObject]? = nil
-    var wordObject: WordObject? = nil
+    @IBOutlet weak var prevWordButton: UIButton!
+    @IBOutlet weak var nextWordButton: UIButton!
+    
     var synonymViewController: SynonymCardViewController? = nil
     var meaningIndex = 0
+    
+    var wordList:[WordObject]  = []
+    var wordIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
-        self.wordLabel.text = wordObject!.word
-        self.meaningObjectList = self.wordObject?.getMeaningList()
         updateUI()
     }
     
     func updateUI() {
-        let meaningObject = self.meaningObjectList![self.meaningIndex]
+        let wordObject = self.wordList[self.wordIndex]
+        let meaningObjectList = wordObject.getMeaningList()
+        let meaningObject = meaningObjectList[self.meaningIndex]
         partOfSpeechLabel.text = meaningObject.partOfSpeech
+        self.wordLabel.text = wordObject.word
         meaningLabel.text = meaningObject.meaning
         exampleLabel.text =  "\"\(meaningObject.example)\""
         if meaningIndex <= 0 {
@@ -41,10 +46,20 @@ class WordMeaningViewController: UIViewController {
         } else {
             self.prevButton.isHidden = false
         }
-        if meaningIndex >= (meaningObjectList?.count)! - 1 {
+        if meaningIndex >= (meaningObjectList.count) - 1 {
             self.nextButton.isHidden = true
         } else {
             self.nextButton.isHidden = false
+        }
+        if self.wordIndex <= 0 {
+            self.prevWordButton.isHidden = true
+        } else {
+            self.prevWordButton.isHidden = false
+        }
+        if self.wordIndex >= self.wordList.count - 1 {
+            self.nextWordButton.isHidden = true
+        } else {
+            self.nextWordButton.isHidden = false
         }
         self.synonymViewController?.setSynonymsList(synonymsList: meaningObject.getSynonyms())
     }
@@ -53,8 +68,9 @@ class WordMeaningViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func setWordObjectAndSynonymVC(wordObject: WordObject, synonymVC: SynonymCardViewController) {
-        self.wordObject = wordObject
+    func setWordListAndIndexAndVC(wordList: [WordObject], index: Int, synonymVC: SynonymCardViewController) {
+        self.wordList = wordList
+        self.wordIndex = index
         self.synonymViewController = synonymVC
     }
     
@@ -68,10 +84,26 @@ class WordMeaningViewController: UIViewController {
         updateUI()
     }
     
+
+    
+    @IBAction func prevWordButtonPressed(_ sender: Any) {
+        self.wordIndex -= 1
+        self.meaningIndex = 0
+        updateUI()
+    }
+    
+    @IBAction func nextWordButtonPressed(_ sender: Any) {
+        self.wordIndex += 1
+        self.meaningIndex = 0
+        updateUI()
+    }
+    
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.toYesNoGameSegue {
             let gameVC = segue.destination as! YesNoGameViewController
-            gameVC.receivedGameObject(gameObject: YesNoGameObject(wordObject: self.wordObject!))
+            gameVC.receivedGameObject(gameObject: YesNoGameObject(wordObject: self.wordList[self.wordIndex]))
         }
     }
     

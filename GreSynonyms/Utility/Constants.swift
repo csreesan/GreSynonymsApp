@@ -37,27 +37,13 @@ struct Column {
     static let total_num = Expression<Int>("total_num")
  }
 
-
-struct PickerObject {
-    
-    let labels: [String]
-    let type: TableType
-    init(type: TableType) {
-        if type == .synonyms {
-            self.labels = SynonymPickerOptions.labels
-        } else {
-            self.labels = WordPickerOptions.labels
-        }
-        self.type = type
-    }
-}
-
 struct Constants {
     
     static let toYesNoGameSegue = "toYesNoGame"
     static let toWordsSegue = "toWords"
     static let toCategoryControllerSegue = "toCategoryController"
     static let toFlashSegue = "toFlash"
+    static let toHowToSegue = "toHowTo"
 
     static let flashCardsMainLabel = "Flash Cards"
     static let categoryToTestLabel = "Choose Cateogry to Test"

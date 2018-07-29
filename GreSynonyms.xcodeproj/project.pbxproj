@@ -20,6 +20,7 @@
 		94BB7C8C2109C10800B929BE /* QueryUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BB7C8B2109C10800B929BE /* QueryUtility.swift */; };
 		94BB7C8E210A8CAA00B929BE /* SQLStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BB7C8D210A8CAA00B929BE /* SQLStrings.swift */; };
 		94BB7C90210A964A00B929BE /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BB7C8F210A964A00B929BE /* Enums.swift */; };
+		94BB7C92210DCB2E00B929BE /* HowToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BB7C91210DCB2E00B929BE /* HowToViewController.swift */; };
 		94C918D720D8AE2E0049778F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C918D620D8AE2E0049778F /* AppDelegate.swift */; };
 		94C918D920D8AE2E0049778F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C918D820D8AE2E0049778F /* MainViewController.swift */; };
 		94C918DC20D8AE2E0049778F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94C918DA20D8AE2E0049778F /* Main.storyboard */; };
@@ -86,6 +87,7 @@
 		94BB7C8B2109C10800B929BE /* QueryUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryUtility.swift; sourceTree = "<group>"; };
 		94BB7C8D210A8CAA00B929BE /* SQLStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLStrings.swift; sourceTree = "<group>"; };
 		94BB7C8F210A964A00B929BE /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		94BB7C91210DCB2E00B929BE /* HowToViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToViewController.swift; sourceTree = "<group>"; };
 		94C918D320D8AE2E0049778F /* GreSynonyms.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreSynonyms.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94C918D620D8AE2E0049778F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94C918D820D8AE2E0049778F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				94C918D620D8AE2E0049778F /* AppDelegate.swift */,
 				94C918D820D8AE2E0049778F /* MainViewController.swift */,
 				945AFC1C2101CFD200668D68 /* CategoriesViewController.swift */,
+				94BB7C91210DCB2E00B929BE /* HowToViewController.swift */,
 				94CB55912100544500031BE7 /* FlashCard */,
 				94CB558B210053E200031BE7 /* YesNoGame */,
 			);
@@ -531,6 +534,7 @@
 				94CF240220EDF0D500BB9249 /* YesNoGameViewController.swift in Sources */,
 				94CB55782100499900031BE7 /* FlashCardsTableTableViewController.swift in Sources */,
 				94C918D920D8AE2E0049778F /* MainViewController.swift in Sources */,
+				94BB7C92210DCB2E00B929BE /* HowToViewController.swift in Sources */,
 				94C9190D20D8B0700049778F /* Utility.swift in Sources */,
 				943927A120DA046D004202EB /* ProgressHUD.m in Sources */,
 				94CB558421004F7500031BE7 /* DictionaryDatabaseUtility.swift in Sources */,

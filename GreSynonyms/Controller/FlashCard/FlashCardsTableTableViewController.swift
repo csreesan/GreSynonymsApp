@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol WordObjectReceiver {
-    func receivedWordObject(wordObject: WordObject)
+protocol WordListAndIndexReceiver {
+    func receivedWordListAndIndex(wordList: [WordObject], index: Int)
 }
 
 class FlashCardsTableTableViewController: UITableViewController, WordListReceiver {
@@ -50,7 +50,7 @@ class FlashCardsTableTableViewController: UITableViewController, WordListReceive
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.toFlashSegue {
             let destinationVC = segue.destination as! WordsTabBarController
-            destinationVC.receivedWordObject(wordObject: self.wordList[self.indexSelected])
+            destinationVC.receivedWordListAndIndex(wordList: self.wordList, index: self.indexSelected)
         }
     }
     
