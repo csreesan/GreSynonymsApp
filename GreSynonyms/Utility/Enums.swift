@@ -29,12 +29,12 @@ enum SynonymPickerOptions: String {
     case timeLastAttempted = "Time Last Attempted"
     case timeLastCompleted = "Time Last Completed"
     static let labels: [String] = [SynonymPickerOptions.alphabetical.rawValue,
+                                   SynonymPickerOptions.timeLastCompleted.rawValue,
+                                   SynonymPickerOptions.timeLastAttempted.rawValue,
                                    SynonymPickerOptions.latestCorrectPercentageWhenCompleted.rawValue,
                                    SynonymPickerOptions.averageCorrectPercentageWhenCompleted.rawValue,
                                    SynonymPickerOptions.allTimeCorrectPercentage.rawValue,
-                                   SynonymPickerOptions.recentCorrectPercentage.rawValue,
-                                   SynonymPickerOptions.timeLastAttempted.rawValue,
-                                   SynonymPickerOptions.timeLastCompleted.rawValue]
+                                   SynonymPickerOptions.recentCorrectPercentage.rawValue]
 }
 
 enum WordPickerOptions: String {
@@ -76,8 +76,8 @@ enum HowToSection: String {
         switch  self {
         case .basics:
             return """
-            1. Learn the words in groups in “STUDY”:
-            pick a synonym group and see the words and their meaning!\n
+            1. Learn the words in groups using “STUDY”:
+            Pick a synonym group and learn the words!\n
             2. Test yourself in “TEST”:
             Pick the synonym you want to test > press “Yep!” if the word you see belong in the group, “Nope!” otherwise \n
             3. Once you finish the question or end the test, see your results!
@@ -91,7 +91,7 @@ enum HowToSection: String {
             """
         case .useStats:
             return """
-            To assist you in chosing what to test or what to brush up on, toggle is provided to allow you to see your categories or words in different orders depending on the stats. \n
+            To assist you in chosing what to test or what to brush up on, a toggle is provided to allow you to see your categories or words in different orders depending on the stats. \n
             At the bottom of the page in "TEST", "STUDY", and "All Words", you can pick any order you want and the stats will appear, the default is alphabetical.
             """
         case .flashcards:

@@ -26,6 +26,7 @@ class WordMeaningViewController: UIViewController {
     
     var wordList:[WordObject]  = []
     var wordIndex = 0
+    var actionSheetIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,12 +104,33 @@ class WordMeaningViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.toYesNoGameSegue {
             let gameVC = segue.destination as! YesNoGameViewController
-            gameVC.receivedGameObject(gameObject: YesNoGameObject(wordObject: self.wordList[self.wordIndex]))
+            if self.actionSheetIndex == 0 {
+                gameVC.receivedGameObject(gameObject: YesNoGameObject(wordObject: self.wordList[self.wordIndex]))
+            } else {
+                let meaningObject = self.wordList[self.wordIndex].getMeaningList()[self.meaningIndex]
+                let synonymObject = SynonymObject(id: meaningObject.synonymId)
+                gameVC.receivedGameObject(gameObject: YesNoGameObject(synonymObject: synonymObject))
+            }
         }
     }
     
     @IBAction func testButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "toYesNoGame", sender: self)
+        let actionSheet = UIAlertController(title: "Select Your Test", message: nil, preferredStyle: .actionSheet)
+        let testWord = UIAlertAction(title: "Test \"\(self.wordList[self.wordIndex].word)\"", style: .default, handler: {(UIAlertAction) in
+            self.actionSheetIndex = 0
+            self.performSegue(withIdentifier: "toYesNoGame", sender: self)
+        })
+        let meaningObject = self.wordList[self.wordIndex].getMeaningList()[self.meaningIndex]
+        let synonymObject = SynonymObject(id: meaningObject.synonymId)
+        let testSynonym = UIAlertAction(title: "Test \"\(synonymObject.label)\"", style: .default, handler: {(UIAlertAction) in
+            self.actionSheetIndex = 1
+            self.performSegue(withIdentifier: "toYesNoGame", sender: self)
+        })
+        let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        actionSheet.addAction(testWord)
+        actionSheet.addAction(testSynonym)
+        actionSheet.addAction(cancel)
+        present(actionSheet, animated: true, completion: nil)
     }
     
     
