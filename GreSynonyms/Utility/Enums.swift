@@ -85,8 +85,10 @@ enum HowToSection: String {
         case .testing:
             return """
             Two Types of Tests\n
-            1. Test by synonym group through "STUDY" section: synonym name appears on top, if the word that appears below it belongs to the synonym group press "Yep!", otherwise "Nope!" \n
-            2. Test by word through "Test" button on top of a word's flashcard: word to test appears on top, if the word below it is a syonym of that word press "Yep!", otherwise "Nope!"\n
+            1. Test by synonym group, "STUDY" or "Test" button on word's flashcard (second option):
+            synonym name appears on top, if the word that appears below it belongs to the synonym group press "Yep!", otherwise "Nope!" \n
+            2. Test by word, "Test" button on word's flashcard (first option):
+            word to test appears on top, if the word below it is a syonym of that word press "Yep!", otherwise "Nope!"\n
             At the end of the test the results will appear, you can see what words belong to the synonyms groups you were testing, what words were tested, and what you got right and wrong.
             """
         case .useStats:
@@ -98,7 +100,8 @@ enum HowToSection: String {
             return """
             With flashcards you can toggle between meaning and synonyms using the tab bar at the bottom of the page.\n
             In the meaning section, the arrows at the bottom allows you to navigate through the set without having to go back to the table.\n
-            If the word has more than one meaning, "next meaning" button will appear. The synonym section will show only synonyms that belong to that specific meaning.
+            If the word has more than one meaning, "next meaning" button will appear. The synonym section will show only synonyms that belong to that specific meaning.\n
+            "Test" button allows you to test the word or jump to testing the synonym.
             """
         }
     }
