@@ -122,14 +122,14 @@ class YesNoGameViewController: UIViewController {
             storeProgressToDatabse(endGame: true)
             insertToCompletedGamesTable()
             let alert = UIAlertController(title: "Done!", message: "You've finished all the words, with the score of \(score)/\(totalWords)!", preferredStyle: .alert)
-            let restartAction = UIAlertAction(title: "Main Menu", style: .default, handler: {(UIAlertAction) in
+            let mainMenu = UIAlertAction(title: "Main Menu", style: .default, handler: {(UIAlertAction) in
                 self.navigationController?.popToRootViewController(animated: true)
             })
-            let flashCardAction = UIAlertAction(title: "To Game Flash Cards", style: .default, handler: {(UIAlertAction) in
+            let toGameResults = UIAlertAction(title: "To Game Results", style: .default, handler: {(UIAlertAction) in
                 self.goToCategoriesViewController()
             })
-            alert.addAction(restartAction)
-            alert.addAction(flashCardAction)
+            alert.addAction(toGameResults)
+            alert.addAction(mainMenu)
             present(alert, animated: true, completion: nil)
         }
     }
