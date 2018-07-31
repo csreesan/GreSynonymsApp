@@ -15,9 +15,9 @@ class WordMeaningViewController: UIViewController {
     @IBOutlet weak var meaningLabel: UILabel!
     @IBOutlet weak var exampleLabel: UILabel!
     
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var prevButton: UIButton!
     
+    @IBOutlet weak var nextMeaningButton: UIButton!
+    @IBOutlet weak var prevMeaningButton: UIButton!
     @IBOutlet weak var prevWordButton: UIButton!
     @IBOutlet weak var nextWordButton: UIButton!
     
@@ -42,26 +42,8 @@ class WordMeaningViewController: UIViewController {
         self.wordLabel.text = wordObject.word
         meaningLabel.text = meaningObject.meaning
         exampleLabel.text =  "\"\(meaningObject.example)\""
-        if meaningIndex <= 0 {
-            self.prevButton.isHidden = true
-        } else {
-            self.prevButton.isHidden = false
-        }
-        if meaningIndex >= (meaningObjectList.count) - 1 {
-            self.nextButton.isHidden = true
-        } else {
-            self.nextButton.isHidden = false
-        }
-        if self.wordIndex <= 0 {
-            self.prevWordButton.isHidden = true
-        } else {
-            self.prevWordButton.isHidden = false
-        }
-        if self.wordIndex >= self.wordList.count - 1 {
-            self.nextWordButton.isHidden = true
-        } else {
-            self.nextWordButton.isHidden = false
-        }
+        hideOrShowMeaningButtons(meaningObjectList: meaningObjectList)
+        hideOrShowWordButtons()
         self.synonymViewController?.setSynonymsList(synonymsList: meaningObject.getSynonyms())
     }
     
@@ -75,16 +57,41 @@ class WordMeaningViewController: UIViewController {
         self.synonymViewController = synonymVC
     }
     
-    @IBAction func nextButtonPressed(_ sender: UIButton) {
+    
+    func hideOrShowMeaningButtons(meaningObjectList: [MeaningObject]) {
+        if meaningIndex <= 0 {
+            self.prevMeaningButton.isHidden = true
+        } else {
+            self.prevMeaningButton.isHidden = false
+        }
+        if meaningIndex >= (meaningObjectList.count) - 1 {
+            self.nextMeaningButton.isHidden = true
+        } else {
+            self.nextMeaningButton.isHidden = false
+        }
+    }
+    
+    func hideOrShowWordButtons() {
+        if self.wordIndex <= 0 {
+            self.prevWordButton.isHidden = true
+        } else {
+            self.prevWordButton.isHidden = false
+        }
+        if self.wordIndex >= self.wordList.count - 1 {
+            self.nextWordButton.isHidden = true
+        } else {
+            self.nextWordButton.isHidden = false
+        }
+    }
+    
+    @IBAction func nextMeaningButtonPressed(_ sender: Any) {
         self.meaningIndex += 1
         updateUI()
     }
-    
-    @IBAction func preButtonPressed(_ sender: UIButton) {
+    @IBAction func prevMeaningButtonPressed(_ sender: Any) {
         self.meaningIndex -= 1
         updateUI()
     }
-    
 
     
     @IBAction func prevWordButtonPressed(_ sender: Any) {

@@ -419,7 +419,7 @@
                                                     <color key="titleColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="nextButtonPressed:" destination="vpd-2a-qww" eventType="touchUpInside" id="0da-al-Cd7"/>
+                                                    <action selector="nextMeaningButtonPressed:" destination="vpd-2a-qww" eventType="touchUpInside" id="W9W-3o-mJh"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGd-7a-JCI" userLabel="PrevMeaningButton">
@@ -429,7 +429,7 @@
                                                     <color key="titleColor" white="0.49162946429999999" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="preButtonPressed:" destination="vpd-2a-qww" eventType="touchUpInside" id="HcW-pH-9Jn"/>
+                                                    <action selector="prevMeaningButtonPressed:" destination="vpd-2a-qww" eventType="touchUpInside" id="pmv-71-xae"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1IP-oI-fEs">
@@ -549,10 +549,10 @@
                     <connections>
                         <outlet property="exampleLabel" destination="FRb-IY-RtV" id="nLy-jL-rgZ"/>
                         <outlet property="meaningLabel" destination="qcV-cB-Ote" id="2go-EA-UVP"/>
-                        <outlet property="nextButton" destination="utX-3N-RlX" id="Cby-dS-sXg"/>
+                        <outlet property="nextMeaningButton" destination="utX-3N-RlX" id="cBA-po-gSn"/>
                         <outlet property="nextWordButton" destination="ylk-jU-oew" id="R0a-Xr-yDX"/>
                         <outlet property="partOfSpeechLabel" destination="qsp-bV-C7A" id="eLv-qX-05N"/>
-                        <outlet property="prevButton" destination="KGd-7a-JCI" id="OgG-z4-lye"/>
+                        <outlet property="prevMeaningButton" destination="KGd-7a-JCI" id="wep-x2-g3I"/>
                         <outlet property="prevWordButton" destination="Lo5-cq-SWE" id="32w-Pp-IY1"/>
                         <outlet property="wordLabel" destination="400-yE-vZb" id="8AU-kE-Gjd"/>
                         <segue destination="4ge-BL-nrA" kind="show" identifier="toYesNoGame" id="zfd-j8-4mE"/>
