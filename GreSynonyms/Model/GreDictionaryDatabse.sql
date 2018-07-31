@@ -349,7 +349,7 @@ VALUES
 	(115, 20, "adj.", "lacking adult sophistication, immature", "a story about a callow youth who learns the value of hard work and self-reliance"),
 
 	(116, 21, "adj.", "marked by or suffering from severe poverty", "penurious peasants and fisherfolk"),
-	(117, 21, "adj.", "lacking possessions and resources; suffering extreme poverty", "adestitute old man"),
+	(117, 21, "adj.", "lacking possessions and resources; suffering extreme poverty", "a destitute old man"),
 	(118, 21, "adj.", "having very little or no money usually habitually", "they were so impecunious that they couldn't afford to give one another even token Christmas gifts"),
 	(119, 21, "adj.", "suffering from extreme poverty", "The clinic provides free care for indigent patients."),
 
