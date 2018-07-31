@@ -29,7 +29,7 @@ VALUES
 	(5, "Talkative"),
 	(6, "Boring, Unoriginal"),
 	(7, "Arrogant, Self-important"),
-	(8, "Imposing Authority/ Insisting Obedience"),
+	(8, "Having Authority/ Controlling"),
 	(9, "Lengthy or Verbose"),
 	(10, "Beginning/Young or Growing"),
 	(11, "Forshadowing Something Bad"),
@@ -337,8 +337,8 @@ VALUES
 	(106, 18, "v.", "to make better or more tolerable", "medicine to ameliorate the pain"),
 	(107, 18, "v.", "to make less severe or painful", "mitigate a patient's suffering"),
 	(108, 18, "v.", "to lessen the intensity of (something that pains or distresses)", "unable to assuage their grief"),
-	(109, 18, "v.",	"to make (something, such as suffering) more bearable", "Her sympathy alleviatedhis distress."),
-	(110, 18, "v.", "to moderate the intensity of", "trying topalliate the boredom"),
+	(109, 18, "v.",	"to make (something, such as suffering) more bearable", "Her sympathy alleviated his distress."),
+	(110, 18, "v.", "to moderate the intensity of", "trying to palliate the boredom"),
 	(111, 18, "v.", "to reduce in degree or intensity", "may abate their rancor to win peace"),
 							
 	(112, 19, "adj.", "relating to or typical and pleasant aspects of rural life", "the bucolic landscapes and pastoral grace."),
@@ -366,7 +366,7 @@ VALUES
 	(128, 23, "adj.", "marked by hot temper and easily provoked anger", "an irascible old football coach"),
 									
 	(129, 24, "adj.", "yielding something abundantly; present in large quantity", "a copious harvest"),
-	(130, 24, "adj.", "generous or more than adequate in size, scope, or capacity; generously sufficient to satisfy a requirement or need", "They had amplemoney for the trip."),
+	(130, 24, "adj.", "generous or more than adequate in size, scope, or capacity; generously sufficient to satisfy a requirement or need", "They had ample money for the trip."),
 	(131, 24, "adj.", "exhibiting great abundance", "a profuse harvest"),
 	(132, 24, "adj.", "characterized by abundance", "grateful survivors who were fulsome in their praise of the rescue team"),
 	(133, 24, "adj.", "given or provided abundantly", "a bountiful harvest");	

@@ -82,7 +82,11 @@ class YesNoGameViewController: UIViewController {
             self.score += 1
             self.correctWordList.append(currentWordObject)
             result = 1
-            synListIDForLog = currentWordObject.getSynonymIDList().filter {self.answerKey.contains($0)}
+            if answerTag == 1 {
+                synListIDForLog = currentWordObject.getSynonymIDList().filter {self.answerKey.contains($0)}
+            } else {
+                synListIDForLog = self.answerKey
+            }
         } else {
             ProgressHUD.showError("Wrong!")
             self.wrongWordList.append(currentWordObject)
