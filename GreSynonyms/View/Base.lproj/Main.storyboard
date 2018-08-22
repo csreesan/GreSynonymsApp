@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -404,10 +403,10 @@
                                 <rect key="frame" x="20" y="84" width="335" height="514"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fx6-Ju-PpI">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="116.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="115.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Word" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="400-yE-vZb">
-                                                <rect key="frame" x="131.5" y="56" width="72" height="35"/>
+                                                <rect key="frame" x="132" y="55" width="72" height="35"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="29"/>
                                                 <color key="textColor" red="0.23529411759999999" green="0.18039215689999999" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -432,58 +431,41 @@
                                                     <action selector="prevMeaningButtonPressed:" destination="vpd-2a-qww" eventType="touchUpInside" id="pmv-71-xae"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1IP-oI-fEs">
-                                                <rect key="frame" x="148.5" y="10" width="38" height="30.5"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="1IP-oI-fEs" secondAttribute="height" multiplier="37:30" id="l1h-4X-fwg"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                                                <size key="titleShadowOffset" width="1" height="1"/>
-                                                <state key="normal" title="TEST">
-                                                    <color key="titleColor" red="0.23529411759999999" green="0.18039215689999999" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="titleShadowColor" red="0.87058823529999996" green="0.93333333330000001" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="testButtonPressed:" destination="vpd-2a-qww" eventType="touchUpInside" id="OSg-da-Ugq"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="KGd-7a-JCI" firstAttribute="leading" secondItem="Fx6-Ju-PpI" secondAttribute="leading" constant="10" id="AB3-WE-dBF"/>
                                             <constraint firstItem="400-yE-vZb" firstAttribute="centerY" secondItem="Fx6-Ju-PpI" secondAttribute="centerY" constant="15" id="HsU-bb-bya"/>
                                             <constraint firstItem="utX-3N-RlX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Fx6-Ju-PpI" secondAttribute="leading" constant="20" symbolic="YES" id="MGo-jj-iXX"/>
-                                            <constraint firstItem="1IP-oI-fEs" firstAttribute="top" secondItem="Fx6-Ju-PpI" secondAttribute="top" constant="10" id="MVK-Pf-xpt"/>
                                             <constraint firstItem="utX-3N-RlX" firstAttribute="top" secondItem="Fx6-Ju-PpI" secondAttribute="top" constant="10" id="OdM-j9-Igd"/>
                                             <constraint firstAttribute="trailing" secondItem="utX-3N-RlX" secondAttribute="trailing" constant="10" id="X5P-ZB-L3J"/>
                                             <constraint firstItem="KGd-7a-JCI" firstAttribute="top" secondItem="Fx6-Ju-PpI" secondAttribute="top" constant="10" id="aAo-CC-90e"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="400-yE-vZb" secondAttribute="trailing" id="gZi-w3-9UL"/>
                                             <constraint firstItem="400-yE-vZb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Fx6-Ju-PpI" secondAttribute="leading" id="nzg-7k-YH0"/>
                                             <constraint firstItem="400-yE-vZb" firstAttribute="centerX" secondItem="Fx6-Ju-PpI" secondAttribute="centerX" id="tot-5l-dIh"/>
-                                            <constraint firstItem="1IP-oI-fEs" firstAttribute="centerX" secondItem="Fx6-Ju-PpI" secondAttribute="centerX" id="vTm-aY-1R7"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KGd-7a-JCI" secondAttribute="trailing" constant="20" symbolic="YES" id="ylZ-U4-xx0"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsp-bV-C7A">
-                                        <rect key="frame" x="0.0" y="126.5" width="335" height="39"/>
+                                        <rect key="frame" x="0.0" y="125.5" width="335" height="39"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="21"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcV-cB-Ote">
-                                        <rect key="frame" x="0.0" y="175.5" width="335" height="155.5"/>
+                                        <rect key="frame" x="0.0" y="174.5" width="335" height="156"/>
                                         <string key="text">This word has a really long meaning and so it is going to be very long because it is very long. And therefore it becomes very very long</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The example is probably going to be very long as well so it is gonna suck." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRb-IY-RtV">
-                                        <rect key="frame" x="0.0" y="341" width="335" height="116.5"/>
+                                        <rect key="frame" x="0.0" y="340.5" width="335" height="116.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JBH-z1-dAL">
-                                        <rect key="frame" x="0.0" y="467.5" width="335" height="46.5"/>
+                                        <rect key="frame" x="0.0" y="467" width="335" height="47"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lo5-cq-SWE">
                                                 <rect key="frame" x="10" y="4" width="44" height="38"/>
@@ -493,6 +475,16 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="prevWordButtonPressed:" destination="vpd-2a-qww" eventType="touchUpInside" id="aIj-Mc-ZbI"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1IP-oI-fEs">
+                                                <rect key="frame" x="146.5" y="0.0" width="41" height="47"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                                <state key="normal" title="TEST">
+                                                    <color key="titleColor" white="0.49162946429999999" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="testButtonPressed:" destination="vpd-2a-qww" eventType="touchUpInside" id="OSg-da-Ugq"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ylk-jU-oew">
@@ -507,12 +499,17 @@
                                             </button>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="1IP-oI-fEs" firstAttribute="centerY" secondItem="JBH-z1-dAL" secondAttribute="centerY" id="0Yp-Wi-pLG"/>
                                             <constraint firstItem="ylk-jU-oew" firstAttribute="width" secondItem="Lo5-cq-SWE" secondAttribute="width" id="BRF-7Z-a3u"/>
                                             <constraint firstItem="Lo5-cq-SWE" firstAttribute="centerY" secondItem="JBH-z1-dAL" secondAttribute="centerY" id="ILY-HS-JA1"/>
+                                            <constraint firstItem="1IP-oI-fEs" firstAttribute="top" secondItem="JBH-z1-dAL" secondAttribute="top" id="Jsi-Ux-gLe"/>
                                             <constraint firstItem="ylk-jU-oew" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JBH-z1-dAL" secondAttribute="leading" constant="20" symbolic="YES" id="KBL-XE-OLY"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Lo5-cq-SWE" secondAttribute="trailing" constant="20" symbolic="YES" id="Rap-bk-dNR"/>
+                                            <constraint firstAttribute="bottom" secondItem="1IP-oI-fEs" secondAttribute="bottom" id="S50-B7-uVr"/>
                                             <constraint firstItem="Lo5-cq-SWE" firstAttribute="leading" secondItem="JBH-z1-dAL" secondAttribute="leading" constant="10" id="fzW-JQ-ucM"/>
                                             <constraint firstAttribute="trailing" secondItem="ylk-jU-oew" secondAttribute="trailing" constant="10" id="ihx-JF-Sci"/>
+                                            <constraint firstItem="1IP-oI-fEs" firstAttribute="centerY" secondItem="JBH-z1-dAL" secondAttribute="centerY" id="mhG-Yx-dNl"/>
+                                            <constraint firstItem="1IP-oI-fEs" firstAttribute="centerX" secondItem="JBH-z1-dAL" secondAttribute="centerX" id="pE7-ui-ksM"/>
                                             <constraint firstItem="ylk-jU-oew" firstAttribute="centerY" secondItem="JBH-z1-dAL" secondAttribute="centerY" id="tum-xZ-jq0"/>
                                         </constraints>
                                     </view>
@@ -749,7 +746,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="aa9-DT-0uu"/>
-        <segue reference="zfd-j8-4mE"/>
+        <segue reference="nEn-eg-KhS"/>
         <segue reference="DZ3-uD-mSR"/>
     </inferredMetricsTieBreakers>
 </document>
