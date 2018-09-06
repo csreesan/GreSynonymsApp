@@ -5,4 +5,6 @@
 - Word and synonym id's and timestamp are used to track performance
 - SQLite storing usage data to assist user in choosing what to study and test through ordering synonyms or
   words by different information e.g. order by ratio of mistakes, order by time last tested...
+- Below is the current schema for the SQLite database:
   
+  ![alt text](https://github.com/csreesan/GreSynonymsApp/blob/master/current_db_schema.png)
